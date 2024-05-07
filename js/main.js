@@ -91,7 +91,7 @@ function renderTimelineItem(item)
 function fetchScholarData()
 {
     const scholarId = 'O5eVQi0AAAAJ';
-    const apiUrl = `https://scholar.google.com/citations?user=${scholarId}&hl=en&cstart=0&pagesize=100`;
+    const apiUrl = `https://scholar.google.com/citations?user=${scholarId}&hl=en`;
 
     fetch(apiUrl)
         .then(response => response.text())
