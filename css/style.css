@@ -1,0 +1,39 @@
+/* Ayu Dark color scheme */
+:root {
+  --bg-color: #0A0E14;
+  --fg-color: #B3B1AD;
+  --accent-color: #E6B450;
+  --secondary-color: #39BAE6;
+  --header-color: #FFCC66;
+  --card-bg-color: #1F2430;
+  --card-border-color: #2D3748;
+  --timeline-color: #4D5666;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+}
+
+.ui.inverted.segment {
+  background-color: var(--card-bg-color);
+}
+
+.ui.card {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--card-border-color);
+}
+
+.ui.card .header {
+  color: var(--header-color);
+}
+
+.ui.card .meta a {
+  color: var(--secondary-color);
+}
+
+.ui.vertical.timeline::before {
+  background-color: var(--timeline-color);
+}
+
+/* Add more custom styles here */
