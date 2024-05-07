@@ -1,30 +1,68 @@
+// main.js
+let projects = [];
+let selectedTags = [];
+
 // Fetch project data from GitHub repos
 function fetchProjects()
 {
-    fetch('data/projects.json')
-        .then(response => response.json())
-        .then(projects => { projects.forEach(project => renderProject(project)); });
+    fetch('data/projects.json').then(response => response.json()).then(data => {
+        projects = data;
+        renderProjects();
+    });
 }
 
-// Render a project card
-function renderProject(project)
+// Render project cards
+function renderProjects()
 {
-    const card = `
-    <div class="ui card">
-      <div class="content">
-        <div class="header">${project.name}</div>
-        <div class="meta">
-          ${project.tags.map(tag => `<a>${tag}</a>`).join('')}
+    const projectsContainer = document.getElementById('projects');
+    projectsContainer.innerHTML = '';
+
+    const filteredProjects = projects.filter(project => {
+        if (selectedTags.length === 0)
+            return true;
+        return selectedTags.every(tag => project.tags.includes(tag));
+    });
+
+    filteredProjects.forEach(project => {
+        const card = `
+      <div class="card">
+        <div class="content">
+          <div class="header">${project.name}</div>
+          <div class="meta">
+            ${project.tags.map(tag => `<a class="ui label">${tag}</a>`).join('')}
+          </div>
+          <div class="description">${project.summary}</div>
         </div>
-        <div class="description">${project.summary}</div>
+        <div class="extra content">
+          <span class="right floated">${project.date}</span>
+          <a href="${project.url}" target="_blank">View Project</a>
+          ${project.paperUrl ? `<a href="${project.paperUrl}" target="_blank">View Paper</a>` : ''}
+        </div>
       </div>
-      <div class="extra content">
-        <span class="right floated">${project.date}</span>
-        <a href="${project.url}" target="_blank">View Project</a>
-      </div>
-    </div>
-  `;
-    document.getElementById('projects').innerHTML += card;
+    `;
+        projectsContainer.innerHTML += card;
+    });
+}
+
+// Sort projects by name or date
+function sortProjects(criteria)
+{
+    if (criteria === 'name')
+    {
+        projects.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    else if (criteria === 'date')
+    {
+        projects.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+    renderProjects();
+}
+
+// Handle tag filtering
+function handleTagFilter()
+{
+    selectedTags = Array.from(document.querySelectorAll('.ui.checkbox input:checked')).map(checkbox => checkbox.value);
+    renderProjects();
 }
 
 // Fetch blog posts from the posts directory
@@ -39,10 +77,10 @@ function fetchPosts()
 function renderPost(post)
 {
     const item = `
-    <div class="ui item">
+    <div class="item">
       <div class="content">
         <a class="header" href="#" onclick="showPost('${post.id}')">${post.title}</a>
-        <div class="meta">${post.date}</div>
+        <div class="description">${post.date}</div>
       </div>
     </div>
   `;
@@ -53,15 +91,9 @@ function renderPost(post)
 function showPost(id)
 {
     fetch(`posts/${id}.md`).then(response => response.text()).then(markdown => {
-        const html = convertMarkdownToHTML(markdown);
+        const html = marked(markdown);
         document.getElementById('blog').innerHTML = html;
     });
-}
-
-// Convert Markdown to HTML (using a library like marked.js)
-function convertMarkdownToHTML(markdown)
-{
-    return marked(markdown);
 }
 
 // Fetch timeline data from a JSON file
@@ -78,7 +110,7 @@ function renderTimelineItem(item)
     const timelineItem = `
     <div class="item">
       <div class="content">
-        <a class="header">${item.title}</a>
+        <h3 class="header">${item.title}</h3>
         <div class="meta">${item.date}</div>
         <div class="description">${item.description}</div>
       </div>
@@ -91,7 +123,7 @@ function renderTimelineItem(item)
 function fetchScholarData()
 {
     const scholarId = 'O5eVQi0AAAAJ';
-    const apiUrl = `https://scholar.google.com/citations?user=${scholarId}&hl=en`;
+    const apiUrl = `https://scholar.google.com/citations?user=${scholarId}&hl=en&view_op=list_works&sortby=pubdate`;
 
     fetch(apiUrl)
         .then(response => response.text())
@@ -99,7 +131,7 @@ function fetchScholarData()
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
 
-            const citationCount = doc.querySelector('#gsc_rsb_st td:nth-child(2)').textContent;
+            const citationCount = doc.querySelector('#gsc_a_ac').textContent;
             const hIndex = doc.querySelector('#gsc_rsb_st tr:nth-child(2) td:nth-child(2)').textContent;
             const i10Index = doc.querySelector('#gsc_rsb_st tr:nth-child(3) td:nth-child(2)').textContent;
 
@@ -115,3 +147,7 @@ fetchProjects();
 fetchPosts();
 fetchTimeline();
 fetchScholarData();
+
+// Event listeners
+document.querySelectorAll('.ui.checkbox')
+    .forEach(checkbox => { checkbox.addEventListener('change', handleTagFilter); });

@@ -19,6 +19,7 @@
         ],
         "summary": "A brief summary of the project...",
         "date": "2022-02-21",
-        "url": "https://github.com/user/repo"
+        "url": "https://github.com/user/repo",
+        "paperUrl": "https://arxiv.org/abs/1609.01596"
     }
 ]

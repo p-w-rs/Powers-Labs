@@ -1,4 +1,4 @@
-/* Ayu Dark color scheme */
+/* style.css */
 :root {
   --bg-color: #0A0E14;
   --fg-color: #B3B1AD;
@@ -36,4 +36,10 @@ body {
   background-color: var(--timeline-color);
 }
 
-/* Add more custom styles here */
+.ui.vertical.timeline .item:before {
+  border-color: var(--accent-color);
+}
+
+.ui.vertical.timeline .item:after {
+  background-color: var(--accent-color);
+}
