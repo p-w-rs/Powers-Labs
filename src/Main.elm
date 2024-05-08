@@ -131,7 +131,7 @@ view model =
     { title = "My Personal Website"
     , body =
         [ layout []
-            (column [ height fill, width fill, Back.color <| c_bg ]
+            (column [ height fill, width fill, Font.color c_fg, Back.color c_bg ]
                 [ navbar [ "About", "Projects", "Books", "Posts" ] (String.dropLeft 1 model.url.path)
                 , page
                 , footer
@@ -156,7 +156,7 @@ navlink name active =
                 inv
     in
     link
-        [ alignRight
+        [ centerX
         , paddingXY 0 8
         , Border.widthEach { bottom = 2, left = 0, right = 0, top = 0 }
         , Border.color color
@@ -219,7 +219,7 @@ posts model =
 
 page404 =
     column [ centerX, height fill ]
-        [ el [ padding 45, centerX, Font.color <| c_err, Font.size 48 ] (text "404 Not Found")
+        [ el [ padding 45, centerX, Font.color c_err, Font.size 48 ] (text "404 Not Found")
         , hide 0
         , el [ padding 10, alignLeft, Font.size 30 ] (text "The page you're looking for was not found.")
         , paragraph [ padding 10, centerX, Font.center, Font.size 30 ]
