@@ -1,45 +1,107 @@
-/* style.css */
-:root {
-  --bg-color: #0A0E14;
-  --fg-color: #B3B1AD;
-  --accent-color: #E6B450;
-  --secondary-color: #39BAE6;
-  --header-color: #FFCC66;
-  --card-bg-color: #1F2430;
-  --card-border-color: #2D3748;
-  --timeline-color: #4D5666;
-}
-
+/* Global Styles */
 body {
-  background-color: var(--bg-color);
-  color: var(--fg-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.ui.inverted.segment {
-  background-color: var(--card-bg-color);
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f1f1;
+  overflow: hidden;
 }
 
-.ui.card {
-  background-color: var(--card-bg-color);
-  border: 1px solid var(--card-border-color);
+nav ul li {
+  float: left;
 }
 
-.ui.card .header {
-  color: var(--header-color);
+nav ul li a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
 }
 
-.ui.card .meta a {
-  color: var(--secondary-color);
+nav ul li a:hover {
+  background-color: #ddd;
 }
 
-.ui.vertical.timeline::before {
-  background-color: var(--timeline-color);
+main {
+  padding: 20px;
 }
 
-.ui.vertical.timeline .item:before {
-  border-color: var(--accent-color);
+h1, h2 {
+  color: #333;
 }
 
-.ui.vertical.timeline .item:after {
-  background-color: var(--accent-color);
+/* Timeline Styles */
+.timeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.timeline-content {
+  position: relative;
+  margin-left: 60px;
+  background: #f1f1f1;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.timeline-content h3 {
+  margin-top: 0;
+}
+
+.timeline-content .date {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background: #333;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 100%;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-right: 7px solid #f1f1f1;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  height: 100%;
+  width: 2px;
+  background: #ccc;
+}
+
+.timeline-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
 }

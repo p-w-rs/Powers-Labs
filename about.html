@@ -1,46 +1,32 @@
-<!-- about.html -->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>About - Your Name</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <title>About Me</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="ui container">
-    <div class="ui inverted segment">
-      <div class="ui inverted secondary pointing menu">
-        <a class="item" href="index.html">Projects</a>
-        <a class="item" href="blog.html">Blog</a>
-        <a class="active item" href="about.html">About</a>
-      </div>
-    </div>
-    
-    <div class="ui segment">
-      <div class="ui grid">
-        <div class="four wide column">
-          <img class="ui small circular image" src="profile.jpg">
-        </div>
-        <div class="twelve wide column">
-          <h2>About Me</h2>
-          <p>I am a passionate software developer with expertise in web technologies. I enjoy building interactive and user-friendly applications that solve real-world problems. With a strong foundation in computer science and a keen eye for design, I strive to create efficient and visually appealing solutions.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="ui segment">
-      <a href="https://scholar.google.com/citations?user=O5eVQi0AAAAJ&hl=en" target="_blank">Google Scholar Profile</a>
-      <div id="scholar-summary">
-        <p>Total Citations: <span id="citation-count"></span></p>
-        <p>h-index: <span id="h-index"></span></p>
-        <p>i10-index: <span id="i10-index"></span></p>
-      </div>
-      <h3>Experience</h3>
-      <div class="ui vertical timeline" id="timeline"></div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+  <h1>About Me</h1>
+  <img src="path/to/your/picture.jpg" alt="Your Name">
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod, nulla sit amet aliquam lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl. Vivamus euismod, nulla sit amet aliquam lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl.</p>
+  
+  <section id="scholar-info">
+    <h2>Google Scholar</h2>
+    <a href="https://scholar.google.com/citations?user=O5eVQi0AAAAJ&hl=en" target="_blank">My Google Scholar</a>
+    <p>Number of publications: <span id="num-publications"></span></p>
+    <p>Citations: <span id="num-citations"></span></p>
+    <p>h-index: <span id="h-index"></span></p>
+  </section>
+  
+  <section id="github-info">
+    <h2>GitHub</h2>
+    <a href="https://github.com/p-w-rs" target="_blank">My GitHub Profile</a>
+  </section>
+  
+  <section id="timeline">
+    <h2>Work Experience and Service Timeline</h2>
+    <div class="timeline-container"></div>
+  </section>
+  
   <script src="js/main.js"></script>
 </body>
 </html>

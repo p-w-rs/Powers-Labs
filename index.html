@@ -1,41 +1,23 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Your Name</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <title>My Portfolio</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="ui container">
-    <div class="ui inverted segment">
-      <div class="ui inverted secondary pointing menu">
-        <a class="active item" href="index.html">Projects</a>
-        <a class="item" href="blog.html">Blog</a>
-        <a class="item" href="about.html">About</a>
-      </div>
-    </div>
-
-    <div class="ui segment">
-      <div class="ui form">
-        <div class="inline fields">
-          <label>Filter by Tags:</label>
-          <div class="field"><div class="ui checkbox"><input type="checkbox" value="tag1"><label>Tag 1</label></div></div>
-          <div class="field"><div class="ui checkbox"><input type="checkbox" value="tag2"><label>Tag 2</label></div></div>
-          <div class="field"><div class="ui checkbox"><input type="checkbox" value="tag3"><label>Tag 3</label></div></div>
-        </div>
-      </div>
-      <div class="ui divider"></div>
-      <div class="ui buttons">
-        <button class="ui button" onclick="sortProjects('name')">Sort by Name</button>
-        <button class="ui button" onclick="sortProjects('date')">Sort by Date</button>
-      </div>
-    </div>
-    
-    <div class="ui four stackable cards" id="projects"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+  <nav>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="books.html">Books</a></li>
+      <li><a href="posts.html">Posts</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <iframe src="about.html"></iframe>
+  </main>
+  
   <script src="js/main.js"></script>
 </body>
 </html>
