@@ -1,107 +1,43 @@
-/* Global Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+/* Add your custom styles here */
+
+.timeline {
+    position: relative;
+    padding: 20px 0;
 }
 
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  background-color: #f1f1f1;
-  overflow: hidden;
-}
-
-nav ul li {
-  float: left;
-}
-
-nav ul li a {
-  display: block;
-  padding: 10px 20px;
-  text-decoration: none;
-  color: #333;
-}
-
-nav ul li a:hover {
-  background-color: #ddd;
-}
-
-main {
-  padding: 20px;
-}
-
-h1, h2 {
-  color: #333;
-}
-
-/* Timeline Styles */
-.timeline-container {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 2px;
+    background-color: #ccc;
+    transform: translateX(-50%);
 }
 
 .timeline-item {
-  position: relative;
-  margin-bottom: 50px;
+    position: relative;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+    padding-right: 30px;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left; 
+    padding-left: 30px;
 }
 
 .timeline-content {
-  position: relative;
-  margin-left: 60px;
-  background: #f1f1f1;
-  border-radius: 4px;
-  padding: 20px;
-}
-
-.timeline-content h3 {
-  margin-top: 0;
-}
-
-.timeline-content .date {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 5px 10px;
-  background: #333;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 4px;
-}
-
-.timeline-content::before {
-  content: '';
-  position: absolute;
-  top: 16px;
-  right: 100%;
-  width: 0;
-  height: 0;
-  border: 7px solid transparent;
-  border-right: 7px solid #f1f1f1;
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 20px;
-  height: 100%;
-  width: 2px;
-  background: #ccc;
-}
-
-.timeline-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #333;
-  color: #fff;
-  text-align: center;
-  line-height: 40px;
-  font-size: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

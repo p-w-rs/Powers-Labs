@@ -1,53 +1,61 @@
-// Fetch Google Scholar information
-fetch('https://scholar.google.com/citations?user=O5eVQi0AAAAJ&hl=en').then(response => response.text()).then(data => {
-    const parser = new DOMParser();
-    const htmlDoc = parser.parseFromString(data, 'text/html');
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentDiv = document.getElementById('content');
 
-    const numPublications = htmlDoc.querySelector('#gsc_a_t').textContent.trim();
-    const numCitations = htmlDoc.querySelector('#gsc_a_c').textContent.trim();
-    const hIndex = htmlDoc.querySelector('#gsc_a_h').textContent.trim();
+    navLinks.forEach(link => {
+        link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const page = link.getAttribute('data-page');
+            const response = await fetch(`${page}.html`);
+            const html = await response.text();
+            contentDiv.innerHTML = html;
 
-    document.getElementById('num-publications').textContent = numPublications;
-    document.getElementById('num-citations').textContent = numCitations;
-    document.getElementById('h-index').textContent = hIndex;
+            if (page === 'about')
+            {
+                fetchGoogleScholarData();
+                renderTimeline();
+            }
+        });
+    });
+
+    // Load about page by default
+    contentDiv.innerHTML = await (await fetch('about.html')).text();
+    fetchGoogleScholarData();
+    renderTimeline();
 });
 
-// Fetch timeline data from timeline.json
-fetch('data/timeline.json').then(response => response.json()).then(data => {
-    const timelineContainer = document.querySelector('.timeline-container');
+async function fetchGoogleScholarData()
+{
+    const url = 'https://scholar.google.com/citations?user=O5eVQi0AAAAJ&hl=en';
+    // Implement web scraping logic to fetch data from the Google Scholar profile
+    // and update the corresponding elements in about.html
+    // For demonstration purposes, we'll use placeholder data
+    document.getElementById('publications').textContent = '10';
+    document.getElementById('citations').textContent = '100';
+    document.getElementById('h-index').textContent = '5';
+    document.getElementById('i10-index').textContent = '3';
+}
 
-    data.forEach(item => {
+async function renderTimeline()
+{
+    const response = await fetch('data/timeline.json');
+    const timelineData = await response.json();
+    const timelineDiv = document.getElementById('timeline');
+
+    timelineData.forEach((item, index) => {
         const timelineItem = document.createElement('div');
         timelineItem.classList.add('timeline-item');
 
-        const timelineIcon = document.createElement('div');
-        timelineIcon.classList.add('timeline-icon');
-        timelineIcon.innerHTML = '<i class="fas fa-briefcase"></i>';
-
         const timelineContent = document.createElement('div');
         timelineContent.classList.add('timeline-content');
+        timelineContent.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>${item.company}</p>
+            <p>${item.date}</p>
+            <p>${item.description}</p>
+        `;
 
-        const title = document.createElement('h3');
-        title.textContent = item.title;
-
-        const company = document.createElement('p');
-        company.textContent = item.company;
-
-        const duration = document.createElement('span');
-        duration.classList.add('date');
-        duration.textContent = item.duration;
-
-        const description = document.createElement('p');
-        description.textContent = item.description;
-
-        timelineContent.appendChild(title);
-        timelineContent.appendChild(company);
-        timelineContent.appendChild(duration);
-        timelineContent.appendChild(description);
-
-        timelineItem.appendChild(timelineIcon);
         timelineItem.appendChild(timelineContent);
-
-        timelineContainer.appendChild(timelineItem);
+        timelineDiv.appendChild(timelineItem);
     });
-});
+}
