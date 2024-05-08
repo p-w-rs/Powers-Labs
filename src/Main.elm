@@ -157,7 +157,7 @@ navlink name active =
     in
     link
         [ centerX
-        , paddingXY 0 8
+        , paddingXY 0 3
         , Border.widthEach { bottom = 2, left = 0, right = 0, top = 0 }
         , Border.color color
         , mouseOver [ Border.color <| c_string ]
@@ -169,7 +169,7 @@ navlink name active =
 
 navbar : List String -> String -> Element Msg
 navbar paths path =
-    row [ width fill ] (List.map (\p -> navlink p (path == String.toLower p)) paths)
+    row [ width fill, spacing 12 ] (List.map (\p -> navlink p (path == String.toLower p)) paths)
 
 
 
