@@ -1,0 +1,136 @@
+[
+  {
+    "company": "Space Dynamics Laboratory",
+    "position": "AI Scientist - AI ML Group Lead",
+    "startDate": "2023-09-01",
+    "endDate": null,
+    "description": "Leading the AI ML group, working on autonomous systems and projects for government contracts.",
+    "keyPoints": [
+      "Provided guidance for AI and ML projects",
+      "Contributed to low-level, performance-critical software development in C"
+    ],
+    "link": "https://www.sdl.usu.edu"
+  },
+  {
+    "company": "Milwaukee School of Engineering",
+    "position": "Professor (Asst. Rank)",
+    "startDate": "2021-08-01",
+    "endDate": "2023-09-01",
+    "description": "Taught AI and Operating Systems courses while engaging in consulting work.",
+    "keyPoints": [
+      "Consulted on recommender systems, AI-guided heat surgery, and data analytics",
+      "Developed curriculum and hands-on projects for AI and Operating Systems courses"
+    ],
+    "link": "https://www.msoe.edu"
+  },
+  {
+    "company": "Direct Supply",
+    "position": "Visiting Researcher",
+    "startDate": "2023-05-01",
+    "endDate": "2023-08-01",
+    "description": "Conducted research at Direct Supply as a visiting researcher.",
+    "keyPoints": [
+      "Collaborated with Direct Supply's research team on innovative projects",
+      "Applied AI and ML techniques to solve real-world problems in the healthcare industry"
+    ],
+    "link": "https://www.directsupply.com"
+  },
+  {
+    "company": "Family 7 Foundations",
+    "position": "Technology Consultant",
+    "startDate": "2022-09-01",
+    "endDate": null,
+    "description": "Providing technology consulting services to Family 7 Foundations.",
+    "keyPoints": [
+      "Advised on the implementation of AI and ML solutions",
+      "Assisted in the development of data-driven strategies"
+    ],
+    "link": "https://www.family7foundations.com"
+  },
+  {
+    "company": "Foley & Lardner",
+    "position": "Data Science Consultant",
+    "startDate": "2022-08-01",
+    "endDate": "2023-08-01",
+    "description": "Offered data science consulting services to Foley & Lardner.",
+    "keyPoints": [
+      "Developed machine learning models for legal data analysis",
+      "Provided insights and recommendations based on data-driven findings"
+    ],
+    "link": "https://www.foley.com"
+  },
+  {
+    "company": "CoreMap",
+    "position": "Machine Learning Consultant",
+    "startDate": "2022-05-01",
+    "endDate": "2022-08-01",
+    "description": "Served as a machine learning consultant for CoreMap.",
+    "keyPoints": [
+      "Designed and implemented machine learning pipelines",
+      "Optimized models for improved performance and scalability"
+    ],
+    "link": "https://coremapmedical.com"
+  },
+  {
+    "company": "Morphology Evolution & Cognition Lab",
+    "position": "Research Assistant",
+    "startDate": "2017-08-01",
+    "endDate": "2021-08-01",
+    "description": "Conducted research as a research assistant at the Morphology Evolution & Cognition Lab.",
+    "keyPoints": [
+      "Investigated the relationship between morphology, evolution, and cognition",
+      "Developed computational models and analyzed data using AI and ML techniques"
+    ],
+    "link": "https://www.meclab.org"
+  },
+  {
+    "company": "Air Force Research Lab",
+    "position": "Research Intern",
+    "startDate": "2017-05-01",
+    "endDate": "2017-08-01",
+    "description": "Interned as a research intern at the Air Force Research Lab.",
+    "keyPoints": [
+      "Assisted in research projects related to AI and ML applications in aerospace",
+      "Gained hands-on experience with cutting-edge technologies and methodologies"
+    ],
+    "link": "https://www.afrl.af.mil"
+  },
+  {
+    "company": "Perception, Control, & Cognition Lab",
+    "position": "Research Assistant",
+    "startDate": "2016-05-01",
+    "endDate": "2017-05-01",
+    "description": "Worked as a research assistant at the Perception, Control, & Cognition Lab.",
+    "keyPoints": [
+      "Conducted experiments and analyzed data related to human perception and cognition",
+      "Developed skills in experimental design, data collection, and statistical analysis"
+    ],
+    "link": "https://github.com/BYU-PCCL"
+  },
+  {
+    "company": "Brigham Young University",
+    "position": "Teaching Assistant",
+    "startDate": "2013-01-01",
+    "endDate": "2016-05-01",
+    "description": "Served as a teaching assistant at Brigham Young University.",
+    "keyPoints": [
+      "Assisted professors in teaching computer science courses",
+      "Provided guidance and support to students, facilitating their learning and understanding"
+    ],
+    "link": "https://cs.byu.edu"
+  },
+  {
+    "company": "The Church of Jesus Christ of Latter-Day Saints",
+    "position": "Missionary",
+    "startDate": "2011-07-01",
+    "endDate": "2013-08-01",
+    "description": "Prosyletized in the Manaus, Brazil Mission.",
+    "keyPoints": [
+      "Taught various individuals and families the Gospel of Jesus Christ",
+      "Helped individuals and families overcome temporal and spiritual trials and be baptized",
+      "Taught and organized groups of missionaries in proselytizing",
+      "Learned Portuguese and developed interpersonal skills"
+    ],
+    "link": "https://www.churchofjesuschrist.org"
+  }
+]

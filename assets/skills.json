@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Julia",
+    "level": 5
+  },
+  {
+    "name": "Python",
+    "level": 3
+  },
+  {
+    "name": "C",
+    "level": 4
+  },
+  {
+    "name": "C++",
+    "level": 3
+  },
+  {
+    "name": "Elm",
+    "level": 4
+  },
+  {
+    "name": "Machine Learning",
+    "level": 5
+  },
+  {
+    "name": "Data Science",
+    "level": 4
+  },
+  {
+    "name": "Reinforcment Learning",
+    "level": 5
+  },
+  {
+    "name": "Javascript",
+    "level": 1
+  },
+  {
+    "name": "Natural Language Processing",
+    "level": 4
+  },
+  {
+    "name": "Embodied Congition",
+    "level": 4
+  },
+  {
+    "name": "AI Research",
+    "level": 5
+  },
+  {
+    "name": "Zig",
+    "level": 2
+  },
+  {
+    "name": "Teaching",
+    "level": 5
+  },
+  {
+    "name": "Git",
+    "level": 1
+  }
+
+]
