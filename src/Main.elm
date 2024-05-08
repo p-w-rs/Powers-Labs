@@ -70,11 +70,7 @@ update msg model =
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
-                    if url.path == "/admin" || url.path == "/teachers" then
-                        ( model, Nav.load (Url.toString url) )
-
-                    else
-                        ( model, Nav.pushUrl model.key (Url.toString url) )
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
 
                 Browser.External href ->
                     ( model, Nav.load href )
