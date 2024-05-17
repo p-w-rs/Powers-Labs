@@ -224,11 +224,8 @@ view model =
                 "/about" ->
                     about model
 
-                "/projects" ->
-                    projects model
-
-                "/books" ->
-                    books model
+                "/repositories" ->
+                    repos model
 
                 "/posts" ->
                     posts model
@@ -247,13 +244,24 @@ view model =
     , body =
         [ layout []
             (column [ height fill, width fill, Font.color c_fg, Back.color c_bg ]
-                [ navbar [ "About", "Projects", "Books", "Posts" ] path
+                [ navbar [ "About", "Repositories", "Posts" ] path
                 , page
                 , footer
                 ]
             )
         ]
     }
+
+
+
+-- VIEW :: WIDGETS
+
+
+spacer : Element msg
+spacer =
+    column [ width fill, Element.paddingEach { top = 0, bottom = 15, left = 0, right = 0 } ]
+        [ el [ centerX, width (fill |> maximum 650), Border.widthEach { top = 0, bottom = 6, left = 0, right = 0 }, Border.rounded 2, Border.color c_func ] none
+        ]
 
 
 
@@ -285,7 +293,7 @@ navlink name active =
 
 navbar : List String -> String -> Element Msg
 navbar paths path =
-    row [ width fill, padding 20, spacing 20, Border.widthEach { top = 0, bottom = 8, left = 0, right = 0 }, Border.color c_line ]
+    row [ width fill, padding 30, spacing 20 ]
         (List.map (\p -> navlink p (path == String.toLower p)) paths)
 
 
@@ -295,7 +303,7 @@ navbar paths path =
 
 footer : Element Msg
 footer =
-    row [ width fill, padding 20, Border.widthEach { top = 8, bottom = 0, left = 0, right = 0 }, Border.color c_line ]
+    row [ width fill, padding 30, Border.widthEach { top = 1, bottom = 0, left = 0, right = 0 }, Border.color c_fg ]
         [ column [ alignLeft, spacing 5 ]
             [ el [ Font.bold ] (text "Joshua Powers")
             , el [] (text "AI Research Scientist")
@@ -316,26 +324,67 @@ footer =
 -- VIEW :: PAGES
 
 
+profilePic : Element Msg
 profilePic =
-    image [ moveDown 25, moveLeft 10, centerX, width (px 150), height (px 150), clip, Border.widthEach { top = 1, bottom = 1, left = 1, right = 1 }, Border.rounded 75, Border.color c_func ]
+    image [ moveDown 10, moveLeft 50, centerX, width (px 150), height (px 150), clip, Border.widthEach { top = 1, bottom = 1, left = 1, right = 1 }, Border.rounded 75, Border.color c_func ]
         { src = "assets/me.jpeg", description = "Profile picture" }
 
 
+aiml : Element Msg
+aiml =
+    row []
+        [ el [ Font.variant Font.smallCaps, moveUp 5 ] (text "ai")
+        , el [ Font.size 28 ] (text "⁄")
+        , el [ Font.variant Font.smallCaps, moveDown 4 ] (text "ml")
+        ]
+
+
+about_paragraphs : List (Element Msg)
 about_paragraphs =
-    [ paragraph [] [ text "I am a passionate AI and ML professional, currently leading the AI ML group at Space Dynamics Laboratory, where I work on autonomous systems and projects for government contracts, ranging from deep reinforcement learning to vision tasks. I also provide guidance for other AI and ML projects and have experience in low-level, performance-critical software development in C." ]
-    , paragraph [] [ text "Prior to my current role, I was a professor at MSOE, teaching AI and Operating Systems while also engaging in consulting work on recommender systems, AI-guided heat surgery, and data analytics. I pursued my PhD studies at UVM, focusing on embodied cognition, and earned my Bachelor's degree in Computer Science with Honors from BYU, where I first developed my passion for AI." ]
-    , paragraph [] [ text "My fascination with AI and ML is broad, encompassing deep learning, evolutionary algorithms, reinforcement learning, robotics, and more. I enjoy exploring unconventional computing methods and applying AI and ML techniques to diverse domains, including biology and physics. I thrive on tackling challenges that require me to learn about new domains or apply novel techniques, and I take pride in my ability to persist in the face of complexity and uncertainty." ]
+    [ paragraph [] [ text "I am a passionate AI&ML professional, currently leading the AI&ML group at Space Dynamics Laboratory, where I work on autonomous systems and projects for government contracts. I also provide guidance for other AI and ML projects and have experience in deploying low-level, performance-critical software in C." ]
+    , paragraph [] [ text "Prior to my current role, I was a professor at MSOE, teaching AI and Operating Systems while also engaging in consulting work on recommender systems, AI-guided heart surgery, and data analytics. I pursued my PhD studies at UVM, focusing on embodied cognition, and earned my Bachelor's degree in Computer Science with Honors from BYU, where I first developed my passion for AI." ]
+    , paragraph [] [ text "My fascination with AI and ML is broad, encompassing deep learning, evolutionary algorithms, reinforcement learning, robotics, and more. I also enjoy exploring unconventional computing methods and applying AI and ML techniques to diverse domains, including biology and physics. I thrive on tackling challenges that require me to learn about new domains or apply novel techniques, and I take pride in my ability to persist in the face of complexity and uncertainty." ]
     , paragraph [] [ text "Beyond my work in AI and ML, I am deeply interested in revolutionizing education systems from elementary to university levels. I constantly challenge the status quo and generate ideas for improving various aspects of life. My straightforward and frank approach allows me to effectively communicate my thoughts and ideas." ]
     , paragraph [] [ text "As a dedicated husband and father, and a devout member of The Church of Jesus Christ of Latter-day Saints, my family is the center of my life. I cherish the time we spend together, whether it's exploring the great outdoors, playing sports, or inventing new games to enjoy at home. I take great joy in supporting my children's artistic and academic pursuits and being involved in their sports activities." ]
     ]
 
 
+viewCiteYear : { a | year : String, count : Int } -> Int -> Element Msg
+viewCiteYear citation max =
+    row [ width fill ]
+        [ el [ Font.size 14, width (px 50) ] (text citation.year)
+        , el [ alignLeft, width (fillPortion citation.count), height fill, Back.color c_string ] none
+        , el [ alignRight, Font.alignRight, paddingXY 5 0, width (fillPortion (max - citation.count)), Font.size 14 ] (text <| String.fromInt citation.count ++ "/" ++ String.fromInt max)
+        ]
+
+
+scholarSummary : Element Msg
+scholarSummary =
+    column [ centerX, alignTop, width (fill |> minimum 400), spacing 20 ]
+        [ row [ centerX, spacing 20 ]
+            [ el [] (text <| "Publications: " ++ String.fromInt scholarProfile.npubs)
+            , el [] (text <| "Citations: " ++ String.fromInt scholarProfile.ncitations)
+            , el [] (text <| "h-index: " ++ String.fromInt scholarProfile.hindex)
+            , el [] (text <| "i10-index: " ++ String.fromInt scholarProfile.i10index)
+            ]
+        , row [ centerX, spacing 20 ]
+            [ link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+                { url = "https://scholar.google.com/citations?user=O5eVQi0AAAAJ&hl=en", label = text "⇱ Google Scholar" }
+            , link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+                { url = "https://github.com/jpp46", label = text "⇱ PhD Code" }
+            , link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+                { url = "https://github.com/p-w-rs", label = text "⇱ GitHub" }
+            ]
+        , column [ centerX, width fill, spacing 10 ] <| List.map (\cite -> viewCiteYear cite 70) scholarProfile.citations
+        ]
+
+
 viewSkill : Skill -> Element Msg
 viewSkill skill =
-    row [ spacing 10, width fill ]
-        [ el [ Font.size 14, width (px 200) ] (text skill.name)
-        , row [ alignLeft, width (fillPortion skill.level), height fill, Back.color c_string ] []
-        , row [ width (fillPortion (7 - skill.level)) ] [ el [ alignRight, paddingXY 5 0, Font.size 14 ] (text <| String.fromInt skill.level ++ "/5") ]
+    row [ width fill ]
+        [ el [ Font.size 14, Font.variant Font.smallCaps, width (px 200) ] (text skill.name)
+        , el [ alignLeft, width (fillPortion skill.level), height fill, Back.color c_string ] none
+        , el [ alignRight, Font.alignRight, paddingXY 5 0, width (fillPortion (5 - skill.level)), Font.size 14 ] (text <| String.fromInt skill.level ++ "/5")
         ]
 
 
@@ -349,15 +398,15 @@ viewExperience experience =
 
                 Nothing ->
                     none
-            , el [ Font.bold, Font.size 18, Font.color c_func ] (text experience.company)
+            , el [ Font.bold, Font.size 18, Font.variant Font.smallCaps, Font.color c_func ] (text experience.company)
             ]
         , row [ spacing 20, width fill ]
-            [ el [ Font.color c_keyword, Font.size 14, alignTop ] (text <| formatDateRange experience.startDate experience.endDate)
+            [ el [ Font.color c_keyword, Font.size 14, Font.variant Font.smallCaps, alignTop ] (text <| formatDateRange experience.startDate experience.endDate)
             , column [ spacing 10, width fill ]
-                [ el [ Font.size 16, Font.bold, Font.color c_constant ] (text experience.position)
+                [ el [ Font.size 16, Font.variant Font.smallCaps, Font.bold, Font.color c_constant ] (text experience.position)
                 , paragraph [ Font.color c_fg, Font.size 14 ] [ text experience.description ]
                 , column [ Font.color c_fg, Font.size 14, spacing 10 ]
-                    [ el [ Font.bold, Font.color c_constant ] (text "Acheivments:")
+                    [ el [ Font.bold, Font.variant Font.smallCaps, Font.color c_constant ] (text "Acheivments:")
                     , column [ spacing 5 ] (List.map (\point -> el [ Font.alignLeft ] (text ("• " ++ point))) experience.keyPoints)
                     ]
                 ]
@@ -380,27 +429,13 @@ formatDateRange startDate endDate =
 
 about : Model -> Element Msg
 about model =
-    column [ centerX, spacing 30, padding 20, width (fill |> maximum 800), onLeft profilePic ]
-        [ textColumn [ spacing 20 ] about_paragraphs
-        , column [ centerX, spacing 20 ]
-            [ row [ spacing 20 ]
-                [ el [] (text <| "Publications: " ++ String.fromInt scholarProfile.npubs)
-                , el [] (text <| "Citations: " ++ String.fromInt scholarProfile.ncitations)
-                , el [] (text <| "h-index: " ++ String.fromInt scholarProfile.hindex)
-                , el [] (text <| "i10-index: " ++ String.fromInt scholarProfile.i10index)
-                ]
-            , row [ centerX, spacing 20 ]
-                [ link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
-                    { url = "https://scholar.google.com/citations?user=O5eVQi0AAAAJ&hl=en", label = text "⇱ Google Scholar" }
-                , link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
-                    { url = "https://github.com/jpp46", label = text "⇱ PhD Code" }
-                , link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
-                    { url = "https://github.com/p-w-rs", label = text "⇱ GitHub" }
-                ]
+    column [ width fill, spacing 50, padding 20 ]
+        [ textColumn [ centerX, width (fill |> maximum 800), spacing 20, onLeft profilePic ] about_paragraphs
+        , wrappedRow [ width fill, spacing 30, padding 20, Border.width 1, Border.color c_func ]
+            [ scholarSummary
+            , column [ centerX, width (fill |> minimum 500), spacing 10 ] (List.map viewSkill model.skills)
             ]
-        , image [ centerX ] { src = "assets/citations.png", description = "Citations Graph" }
-        , column [ width fill, spacing 10 ] (List.map viewSkill model.skills)
-        , column [ spacing 30, width fill ] (List.map viewExperience model.experiences)
+        , column [ centerX, width (fill |> maximum 800), spacing 20 ] (List.map viewExperience model.experiences)
         ]
 
 
@@ -408,15 +443,7 @@ about model =
 --------------------------------------------------------------------------------
 
 
-projects model =
-    el [] none
-
-
-
---------------------------------------------------------------------------------
-
-
-books model =
+repos model =
     el [] none
 
 
@@ -432,6 +459,7 @@ posts model =
 --------------------------------------------------------------------------------
 
 
+page404 : Element msg
 page404 =
     column [ centerX, height fill ]
         [ el [ padding 45, centerX, Font.color c_err, Font.size 48 ] (text "404 Not Found")
@@ -440,7 +468,7 @@ page404 =
         , paragraph [ padding 10, centerX, Font.center, Font.size 30 ]
             [ text "Please go back to the "
             , link
-                [ Font.color <| c_fg, mouseOver [ Font.color <| c_string ] ]
+                [ Font.color <| c_tag, mouseOver [ Font.color <| c_string ] ]
                 { url = "/"
                 , label = text "home page"
                 }

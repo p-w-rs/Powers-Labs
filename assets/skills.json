@@ -24,6 +24,34 @@
     "level": 5
   },
   {
+    "name": "Deep Learning",
+    "level": 5
+  },
+  {
+    "name": "Computer Vision",
+    "level": 4
+  },
+  {
+    "name": "Web Development",
+    "level": 3
+  },
+  {
+    "name": "Databases",
+    "level": 3
+  },
+  {
+    "name": "Docker",
+    "level": 1
+  },
+  {
+    "name": "Vim",
+    "level": 2
+  },
+  {
+    "name": "Java",
+    "level": 1
+  },
+  {
     "name": "Data Science",
     "level": 4
   },
@@ -59,5 +87,4 @@
     "name": "Git",
     "level": 1
   }
-
 ]
