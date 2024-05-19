@@ -414,7 +414,7 @@ about : Model -> Element Msg
 about model =
     column [ width fill, spacing 50, padding 20 ]
         [ textColumn [ centerX, width (fill |> maximum 800), spacing 20, Font.justify, onLeft profilePic ] about_paragraphs
-        , wrappedRow [ width fill, spacing 30, padding 20, Border.width 1, Border.color c_func ]
+        , wrappedRow [ width fill, spacing 30, padding 20, Border.width 1, Border.rounded 5, Border.color c_func ]
             [ scholarSummary
             , column [ centerX, width (fill |> minimum 400), spacing 10 ] (List.map viewSkill model.skills)
             ]

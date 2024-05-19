@@ -4,10 +4,15 @@
     "position": "AI Scientist - AI﹠ML Group Lead",
     "startDate": "2023-09-01",
     "endDate": null,
-    "description": "Leading the AI ML group, working on autonomous systems and projects for government contracts.",
+    "description": "Leading the AI﹠ML group across SDL; working on autonomous systems and projects for government contracts.",
     "keyPoints": [
-      "Provided guidance for AI and ML projects",
-      "Contributed to low-level, performance-critical software development in C"
+      "Created and led a new AI﹠ML group at SDL.",
+      "Developed a set of reference implementations for common deep learning architectures for easy use across SDL branches.",
+      "Led weekly discussions on AI and ML topics, including new research and best practices.",
+      "Consulted on various AI and ML projects across SDL branches.",
+      "Developed an imprinting library for on-the-fly labeling in military surveillance drones.",
+      "Developed the Networked Collaborative Autonomous (NCA) add-on to the Weapon Open Systems Architecture (WOSA) for the next generation of modular munitions.",
+      "Developed a high-performance, low-level, reference router for the Weapon Open Systems Architecture (WOSA)."
     ],
     "link": "https://www.sdl.usu.edu"
   },
@@ -16,10 +21,14 @@
     "position": "Professor (Asst. Rank)",
     "startDate": "2021-08-01",
     "endDate": "2023-09-01",
-    "description": "Taught AI and Operating Systems courses while engaging in consulting work.",
+    "description": "Taught AI and Operating Systems courses; engaged in consulting work and community outreach.",
     "keyPoints": [
-      "Consulted on recommender systems, AI-guided heat surgery, and data analytics",
-      "Developed curriculum and hands-on projects for AI and Operating Systems courses"
+      "Created a new curriculum for hands-on OS development.",
+      "Created and modified multiple projects for Network Protocols curriculum.",
+      "Mentored multiple independent studies courses for deep reinforcement learning, ML weather prediction, and algorithmic trading.",
+      "Mentored a capstone research project for deep learning based warehouse monitoring and automation.",
+      "Mentored a research project into non-Turing based computational models.",
+      "Performed community outreach via multiple consulting projects; mentored a team of students in consulting work."
     ],
     "link": "https://www.msoe.edu"
   },
@@ -30,8 +39,9 @@
     "endDate": "2023-08-01",
     "description": "Conducted research at Direct Supply as a visiting researcher.",
     "keyPoints": [
-      "Collaborated with Direct Supply's research team on innovative projects",
-      "Applied AI and ML techniques to solve real-world problems in the healthcare industry"
+      "Analyzed transaction data to identify patterns and trends.",
+      "Detected anomalous transactions through data analysis.",
+      "Created a system to unify disparate company names between organizations."
     ],
     "link": "https://www.directsupply.com"
   },
@@ -42,8 +52,10 @@
     "endDate": null,
     "description": "Providing technology consulting services to Family 7 Foundations.",
     "keyPoints": [
-      "Advised on the implementation of AI and ML solutions",
-      "Assisted in the development of data-driven strategies"
+      "Created a front-facing website for marketing purposes.",
+      "Prepared teacher and student manuals for publication.",
+      "Managed email accounts on ProtonMail and custom domains.",
+      "Developed a backend SQLite database for internal tools."
     ],
     "link": "https://www.family7foundations.com"
   },
@@ -54,8 +66,7 @@
     "endDate": "2023-08-01",
     "description": "Offered data science consulting services to Foley & Lardner.",
     "keyPoints": [
-      "Developed machine learning models for legal data analysis",
-      "Provided insights and recommendations based on data-driven findings"
+      "Built a recommender system that helped identify missed cross-selling opportunities, resulting in a 15% increase in cross-selling."
     ],
     "link": "https://www.foley.com"
   },
@@ -66,8 +77,7 @@
     "endDate": "2022-08-01",
     "description": "Served as a machine learning consultant for CoreMap.",
     "keyPoints": [
-      "Designed and implemented machine learning pipelines",
-      "Optimized models for improved performance and scalability"
+      "Developed an algorithm to predict the most efficient locations for ablative heart surgery (a minimally invasive procedure) given a specific atrial fibrillation pattern."
     ],
     "link": "https://coremapmedical.com"
   },
@@ -76,10 +86,13 @@
     "position": "Research Assistant",
     "startDate": "2017-08-01",
     "endDate": "2021-08-01",
-    "description": "Conducted research as a research assistant at the Morphology Evolution & Cognition Lab.",
+    "description": "Conducted research at the Morphology Evolution & Cognition Lab.",
     "keyPoints": [
-      "Investigated the relationship between morphology, evolution, and cognition",
-      "Developed computational models and analyzed data using AI and ML techniques"
+      "Published multiple papers on embodied cognition applied to catastrophic forgetting.",
+      "Presented papers and research at multiple conferences and seminars.",
+      "Reviewed papers for multiple high-tier journals and conferences in robotics and machine learning.",
+      "Mentored Master's students in their thesis and projects.",
+      "Mentored undergraduate lab members."
     ],
     "link": "https://www.meclab.org"
   },
@@ -88,10 +101,9 @@
     "position": "Research Intern",
     "startDate": "2017-05-01",
     "endDate": "2017-08-01",
-    "description": "Interned as a research intern at the Air Force Research Lab.",
+    "description": "Interned at the Air Force Research Lab.",
     "keyPoints": [
-      "Assisted in research projects related to AI and ML applications in aerospace",
-      "Gained hands-on experience with cutting-edge technologies and methodologies"
+      "Researched methods for applying deep reinforcement learning in collaborative/swarm environments."
     ],
     "link": "https://www.afrl.af.mil"
   },
@@ -102,8 +114,7 @@
     "endDate": "2017-05-01",
     "description": "Worked as a research assistant at the Perception, Control, & Cognition Lab.",
     "keyPoints": [
-      "Conducted experiments and analyzed data related to human perception and cognition",
-      "Developed skills in experimental design, data collection, and statistical analysis"
+      "Developed a novel method for gradient-based adaptive exploration in deep reinforcement learning."
     ],
     "link": "https://github.com/BYU-PCCL"
   },
@@ -114,8 +125,9 @@
     "endDate": "2016-05-01",
     "description": "Served as a teaching assistant at Brigham Young University.",
     "keyPoints": [
-      "Assisted professors in teaching computer science courses",
-      "Provided guidance and support to students, facilitating their learning and understanding"
+      "Ran and assisted in teaching the Algorithms course.",
+      "Guided students in projects and assignments.",
+      "Helped in the creation of new projects and assignments."
     ],
     "link": "https://cs.byu.edu"
   },
@@ -124,12 +136,12 @@
     "position": "Missionary",
     "startDate": "2011-07-01",
     "endDate": "2013-08-01",
-    "description": "Prosyletized in the Manaus, Brazil Mission.",
+    "description": "Proselytized in the Manaus, Brazil Mission.",
     "keyPoints": [
-      "Taught various individuals and families the Gospel of Jesus Christ",
-      "Helped individuals and families overcome temporal and spiritual trials and be baptized",
-      "Taught and organized groups of missionaries in proselytizing",
-      "Learned Portuguese and developed interpersonal skills"
+      "Taught various individuals and families the Gospel of Jesus Christ.",
+      "Helped individuals and families overcome temporal and spiritual trials and be baptized.",
+      "Taught and organized groups of missionaries in proselytizing.",
+      "Learned Portuguese and developed interpersonal skills."
     ],
     "link": "https://www.churchofjesuschrist.org"
   }

@@ -15145,6 +15145,7 @@ var $author$project$Main$about = function (model) {
 						$mdgriffith$elm_ui$Element$spacing(30),
 						$mdgriffith$elm_ui$Element$padding(20),
 						$mdgriffith$elm_ui$Element$Border$width(1),
+						$mdgriffith$elm_ui$Element$Border$rounded(5),
 						$mdgriffith$elm_ui$Element$Border$color($author$project$Colors$c_func)
 					]),
 				_List_fromArray(
