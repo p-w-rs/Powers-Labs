@@ -13182,14 +13182,7 @@ var $author$project$Main$about_paragraphs = _List_fromArray(
 		_List_Nil,
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$text('I am a passionate AI﹠ML professional, currently leading the AI﹠ML group at Space Dynamics Laboratory, where I work on autonomous systems and projects for government contracts. I also provide guidance for other AI and ML projects and occasionaly deploy low-level, performance-critical software in C.')
-			])),
-		A2(
-		$mdgriffith$elm_ui$Element$paragraph,
-		_List_Nil,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$text('Prior to my current role, I was a professor at MSOE, teaching AI and Operating Systems while also engaging in consulting work on data analytics, recommender systems, and AI-guided heart surgery. I pursued my PhD studies at UVM, focusing on embodied cognition, and earned my Bachelor\'s degree in Computer Science with Honors from BYU, where I first developed my passion for AI.')
+				$mdgriffith$elm_ui$Element$text('I am a passionate AI﹠ML professional, currently leading the AI﹠ML group at Space Dynamics Laboratory, where I work on autonomous systems and projects for government contracts. I also provide guidance for other AI and ML projects and occasionaly deploy low-level, performance-critical software in C. Prior to my current role, I was a professor at MSOE, teaching AI and Operating Systems while also engaging in consulting work on data analytics, recommender systems, and AI-guided heart surgery.')
 			])),
 		A2(
 		$mdgriffith$elm_ui$Element$paragraph,
@@ -13724,16 +13717,16 @@ var $mdgriffith$elm_ui$Element$row = F2(
 var $author$project$Main$scholarProfile = {
 	dx: _List_fromArray(
 		[
-			{aE: 6, by: '2019'},
+			{aE: 5, by: '2019'},
 			{aE: 3, by: '2020'},
-			{aE: 23, by: '2021'},
-			{aE: 36, by: '2022'},
-			{aE: 68, by: '2023'},
-			{aE: 16, by: '2024'}
+			{aE: 24, by: '2021'},
+			{aE: 38, by: '2022'},
+			{aE: 62, by: '2023'},
+			{aE: 44, by: '2024'}
 		]),
 	dO: 3,
-	dR: 1,
-	eg: 153,
+	dR: 2,
+	eg: 176,
 	ej: 13
 };
 var $mdgriffith$elm_ui$Internal$Model$FontSize = function (a) {
@@ -15174,6 +15167,9 @@ var $author$project$Main$about = function (model) {
 				A2($elm$core$List$map, $author$project$Main$viewExperience, model.dG))
 			]));
 };
+var $author$project$Main$books = function (model) {
+	return A2($mdgriffith$elm_ui$Element$el, _List_Nil, $mdgriffith$elm_ui$Element$none);
+};
 var $author$project$Colors$c_bg = A3($mdgriffith$elm_ui$Element$rgb, 13 / 255, 16 / 255, 23 / 255);
 var $author$project$Main$footer = A2(
 	$mdgriffith$elm_ui$Element$row,
@@ -15530,6 +15526,9 @@ var $mdgriffith$elm_ui$Element$layoutWith = F3(
 	});
 var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
 	{gh: _List_Nil});
+var $author$project$Main$musings = function (model) {
+	return A2($mdgriffith$elm_ui$Element$el, _List_Nil, $mdgriffith$elm_ui$Element$none);
+};
 var $mdgriffith$elm_ui$Element$rgba = $mdgriffith$elm_ui$Internal$Model$Rgba;
 var $author$project$Colors$inv = A4($mdgriffith$elm_ui$Element$rgba, 0.0, 0.0, 0.0, 0.0);
 var $author$project$Main$navlink = F2(
@@ -15664,9 +15663,6 @@ var $author$project$Main$page404 = A2(
 					})
 				]))
 		]));
-var $author$project$Main$posts = function (model) {
-	return A2($mdgriffith$elm_ui$Element$el, _List_Nil, $mdgriffith$elm_ui$Element$none);
-};
 var $author$project$Main$repos = function (model) {
 	return A2($mdgriffith$elm_ui$Element$el, _List_Nil, $mdgriffith$elm_ui$Element$none);
 };
@@ -15681,8 +15677,10 @@ var $author$project$Main$view = function (model) {
 				return $author$project$Main$about(model);
 			case '/repositories':
 				return $author$project$Main$repos(model);
-			case '/posts':
-				return $author$project$Main$posts(model);
+			case '/books':
+				return $author$project$Main$books(model);
+			case '/musings':
+				return $author$project$Main$musings(model);
 			default:
 				return $author$project$Main$page404;
 		}
@@ -15707,7 +15705,7 @@ var $author$project$Main$view = function (model) {
 							A2(
 							$author$project$Main$navbar,
 							_List_fromArray(
-								['About', 'Repositories', 'Posts']),
+								['About', 'Repositories', 'Book Reviews', 'Musings']),
 							path),
 							page,
 							$author$project$Main$footer

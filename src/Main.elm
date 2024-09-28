@@ -102,10 +102,10 @@ type alias GoogleScholarProfile =
 scholarProfile : GoogleScholarProfile
 scholarProfile =
     { npubs = 13
-    , ncitations = 153
+    , ncitations = 176
     , hindex = 3
-    , i10index = 1
-    , citations = [ { year = "2019", count = 6 }, { year = "2020", count = 3 }, { year = "2021", count = 23 }, { year = "2022", count = 36 }, { year = "2023", count = 68 }, { year = "2024", count = 16 } ]
+    , i10index = 2
+    , citations = [ { year = "2019", count = 5 }, { year = "2020", count = 3 }, { year = "2021", count = 24 }, { year = "2022", count = 38 }, { year = "2023", count = 62 }, { year = "2024", count = 44 } ]
     }
 
 
@@ -227,8 +227,11 @@ view model =
                 "/repositories" ->
                     repos model
 
-                "/posts" ->
-                    posts model
+                "/books" ->
+                    books model
+
+                "/musings" ->
+                    musings model
 
                 _ ->
                     page404
@@ -244,7 +247,7 @@ view model =
     , body =
         [ layout []
             (column [ height fill, width fill, Font.color c_fg, Back.color c_bg ]
-                [ navbar [ "About", "Repositories", "Posts" ] path
+                [ navbar [ "About", "Repositories", "Book Reviews", "Musings" ] path
                 , page
                 , footer
                 ]
@@ -424,19 +427,18 @@ about model =
 
 --------------------------------------------------------------------------------
 
-
 repos model =
     el [] none
 
+--------------------------------------------------------------------------------
 
+books model =
+    el [] none
 
 --------------------------------------------------------------------------------
 
-
-posts model =
+musings model =
     el [] none
-
-
 
 --------------------------------------------------------------------------------
 
