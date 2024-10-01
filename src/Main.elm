@@ -227,8 +227,8 @@ view model =
                 "/repositories" ->
                     repos model
 
-                "/books" ->
-                    books model
+                "/reviews" ->
+                    reviews model
 
                 "/musings" ->
                     musings model
@@ -247,7 +247,7 @@ view model =
     , body =
         [ layout []
             (column [ height fill, width fill, Font.color c_fg, Back.color c_bg ]
-                [ navbar [ "About", "Repositories", "Book Reviews", "Musings" ] path
+                [ navbar [ "About", "Repositories", "Reviews", "Musings" ] path
                 , page
                 , footer
                 ]
@@ -427,18 +427,27 @@ about model =
 
 --------------------------------------------------------------------------------
 
+
 repos model =
     el [] none
 
+
+
 --------------------------------------------------------------------------------
 
-books model =
+
+reviews model =
     el [] none
 
+
+
 --------------------------------------------------------------------------------
+
 
 musings model =
     el [] none
+
+
 
 --------------------------------------------------------------------------------
 
