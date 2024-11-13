@@ -4,8 +4,12 @@
     "position": "AI Scientist - AI﹠ML Group Lead",
     "startDate": "2023-09-01",
     "endDate": null,
-    "description": "Working on autonomous systems and projects for government contracts.",
+    "description": "Leading the AI﹠ML group across SDL; working on autonomous systems and projects for government contracts.",
     "keyPoints": [
+      "Created and led a new AI﹠ML group at SDL.",
+      "Developed a set of reference implementations for common deep learning architectures for easy use across SDL branches.",
+      "Led weekly discussions on AI and ML topics, including new research and best practices.",
+      "Consulted on various AI and ML projects across SDL branches.",
       "Developed an imprinting library for on-the-fly labeling in military surveillance drones.",
       "Developed the Networked Collaborative Autonomous (NCA) add-on to the Weapon Open Systems Architecture (WOSA) for the next generation of modular munitions.",
       "Developed a high-performance, low-level, reference router for the Weapon Open Systems Architecture (WOSA)."

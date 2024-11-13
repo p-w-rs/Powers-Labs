@@ -5,6 +5,7 @@ import Browser.Events exposing (onResize)
 import Browser.Navigation as Nav
 import Colors exposing (..)
 import Date exposing (Date)
+import Dict exposing (Dict)
 import Element exposing (..)
 import Element.Background as Back
 import Element.Border as Border
@@ -12,8 +13,10 @@ import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
 import Html
+import Html.Attributes
 import Http
 import Json.Decode as Decode exposing (Decoder)
+import Set exposing (Set)
 import Time exposing (Month(..))
 import Url
 
@@ -36,6 +39,7 @@ main =
 
 
 -- MODEL
+-- MODEL :: EXPERIENCE
 
 
 type alias Skill =
@@ -55,6 +59,47 @@ type alias Experience =
     }
 
 
+
+-- MODEL :: REPOSITORIES
+
+
+type Status
+    = Done
+    | Wip
+    | Todo
+
+
+type alias Reference =
+    { title : String
+    , url : String
+    , year : Maybe Int
+    }
+
+
+type alias RepoMeta =
+    { description : String
+    , status : Status
+    , references : Maybe (List Reference)
+    , tags : List String
+    }
+
+
+type alias Repo =
+    { name : String
+    , url : String
+    , meta : Maybe RepoMeta
+    }
+
+
+type SortBy
+    = Alphabetical
+    | Year Bool -- True for ascending
+
+
+
+-- MODEL :: MAIN
+
+
 type alias Flags =
     { width : Int
     , height : Int
@@ -67,12 +112,39 @@ type alias Model =
     , device : Device
     , skills : List Skill
     , experiences : List Experience
+    , repos : List Repo
+    , selectedTags : Set String
+    , allTags : Set String
+    , sortBy : SortBy
+    , expandedRepos : Set String
+    , reposLoading : Bool
+    , reposTotal : Int
     }
 
 
 init : Flags -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-    ( Model key url (classifyDevice flags) [] []
+    ( Model key
+        url
+        (classifyDevice flags)
+        []
+        -- skills
+        []
+        -- experiences
+        []
+        -- repos
+        Set.empty
+        -- selectedTags
+        Set.empty
+        -- allTags
+        Alphabetical
+        -- sortBy
+        Set.empty
+        -- expandedRepos
+        True
+        -- reposLoading
+        0
+      -- reposTotal
     , Cmd.batch
         [ Http.get
             { url = "assets/skills.json"
@@ -81,6 +153,10 @@ init flags url key =
         , Http.get
             { url = "assets/experience.json"
             , expect = Http.expectJson GotExperiences (Decode.list experienceDecoder)
+            }
+        , Http.get
+            { url = "https://api.github.com/users/p-w-rs/repos"
+            , expect = Http.expectJson GotRepos (Decode.list githubRepoDecoder)
             }
         ]
     )
@@ -102,10 +178,10 @@ type alias GoogleScholarProfile =
 scholarProfile : GoogleScholarProfile
 scholarProfile =
     { npubs = 13
-    , ncitations = 176
+    , ncitations = 182
     , hindex = 3
     , i10index = 2
-    , citations = [ { year = "2019", count = 5 }, { year = "2020", count = 3 }, { year = "2021", count = 24 }, { year = "2022", count = 38 }, { year = "2023", count = 62 }, { year = "2024", count = 44 } ]
+    , citations = [ { year = "2019", count = 5 }, { year = "2020", count = 3 }, { year = "2021", count = 24 }, { year = "2022", count = 38 }, { year = "2023", count = 62 }, { year = "2024", count = 50 } ]
     }
 
 
@@ -146,6 +222,62 @@ dateDecoder =
             )
 
 
+statusDecoder : Decoder Status
+statusDecoder =
+    Decode.string
+        |> Decode.andThen
+            (\str ->
+                case str of
+                    "DONE" ->
+                        Decode.succeed Done
+
+                    "WIP" ->
+                        Decode.succeed Wip
+
+                    "TODO" ->
+                        Decode.succeed Todo
+
+                    _ ->
+                        Decode.fail "Invalid status"
+            )
+
+
+referenceDecoder : Decoder Reference
+referenceDecoder =
+    Decode.map3 Reference
+        (Decode.field "title" Decode.string)
+        (Decode.field "url" Decode.string)
+        (Decode.field "year" (Decode.nullable Decode.int))
+
+
+repoMetaDecoder : Decoder RepoMeta
+repoMetaDecoder =
+    Decode.map4 RepoMeta
+        (Decode.field "description" Decode.string)
+        (Decode.field "status" statusDecoder)
+        (Decode.field "references" (Decode.nullable (Decode.list referenceDecoder)))
+        (Decode.field "tags" (Decode.list Decode.string))
+
+
+githubRepoDecoder : Decoder { name : String, url : String }
+githubRepoDecoder =
+    Decode.map2 (\name url -> { name = name, url = url })
+        (Decode.field "name" Decode.string)
+        (Decode.field "html_url" Decode.string)
+
+
+
+-- meta starts as Nothing
+
+
+fetchRepoMeta : String -> String -> Cmd Msg
+fetchRepoMeta owner repo =
+    Http.get
+        { url = "https://raw.githubusercontent.com/" ++ owner ++ "/" ++ repo ++ "/main/meta.json"
+        , expect = Http.expectJson (GotRepoMeta repo) repoMetaDecoder
+        }
+
+
 
 -- UPDATE
 
@@ -156,6 +288,11 @@ type Msg
     | DeviceClassified Device
     | GotSkills (Result Http.Error (List Skill))
     | GotExperiences (Result Http.Error (List Experience))
+    | GotRepos (Result Http.Error (List { name : String, url : String }))
+    | GotRepoMeta String (Result Http.Error RepoMeta)
+    | ToggleTag String
+    | SetSortBy SortBy
+    | ToggleRepoExpand String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -199,6 +336,108 @@ update msg model =
                 Err _ ->
                     ( model, Cmd.none )
 
+        GotRepos result ->
+            case result of
+                Ok githubRepos ->
+                    let
+                        repos =
+                            List.map
+                                (\r ->
+                                    { name = r.name
+                                    , url = r.url
+                                    , meta = Nothing
+                                    }
+                                )
+                                githubRepos
+                    in
+                    ( { model
+                        | repos = repos
+                        , reposLoading = True
+                        , reposTotal = List.length repos
+                      }
+                    , Cmd.batch
+                        (List.map
+                            (\repo ->
+                                fetchRepoMeta "p-w-rs" repo.name
+                            )
+                            repos
+                        )
+                    )
+
+                Err _ ->
+                    ( { model | reposLoading = False }, Cmd.none )
+
+        GotRepoMeta repoName result ->
+            case result of
+                Ok meta ->
+                    let
+                        updateRepo repo =
+                            if repo.name == repoName then
+                                { repo | meta = Just meta }
+
+                            else
+                                repo
+
+                        newRepos =
+                            List.map updateRepo model.repos
+
+                        allTags =
+                            newRepos
+                                |> List.filterMap .meta
+                                |> List.concatMap .tags
+                                |> Set.fromList
+
+                        loadedCount =
+                            List.length (List.filter (.meta >> (/=) Nothing) newRepos)
+
+                        stillLoading =
+                            loadedCount < model.reposTotal
+                    in
+                    ( { model
+                        | repos = newRepos
+                        , allTags = allTags
+                        , reposLoading = stillLoading
+                      }
+                    , Cmd.none
+                    )
+
+                Err _ ->
+                    let
+                        loadedCount =
+                            List.length (List.filter (.meta >> (/=) Nothing) model.repos)
+
+                        stillLoading =
+                            loadedCount < model.reposTotal
+                    in
+                    ( { model | reposLoading = stillLoading }
+                    , Cmd.none
+                    )
+
+        ToggleTag tag ->
+            let
+                newTags =
+                    if Set.member tag model.selectedTags then
+                        Set.remove tag model.selectedTags
+
+                    else
+                        Set.insert tag model.selectedTags
+            in
+            ( { model | selectedTags = newTags }, Cmd.none )
+
+        SetSortBy sort ->
+            ( { model | sortBy = sort }, Cmd.none )
+
+        ToggleRepoExpand repoName ->
+            let
+                newExpanded =
+                    if Set.member repoName model.expandedRepos then
+                        Set.remove repoName model.expandedRepos
+
+                    else
+                        Set.insert repoName model.expandedRepos
+            in
+            ( { model | expandedRepos = newExpanded }, Cmd.none )
+
 
 
 -- SUBSCRIPTIONS
@@ -225,13 +464,7 @@ view model =
                     about model
 
                 "/repositories" ->
-                    repos model
-
-                "/reviews" ->
-                    reviews model
-
-                "/musings" ->
-                    musings model
+                    repositories model
 
                 _ ->
                     page404
@@ -247,7 +480,7 @@ view model =
     , body =
         [ layout []
             (column [ height fill, width fill, Font.color c_fg, Back.color c_bg ]
-                [ navbar [ "About", "Repositories", "Reviews", "Musings" ] path
+                [ navbar [ "About", "Repositories" ] path
                 , page
                 , footer
                 ]
@@ -303,11 +536,11 @@ footer =
                 { url = "mailto:dev@powerslabs.org", label = text "dev@powerslabs.org" }
             ]
         , column [ alignRight, spacing 5 ]
-            [ link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+            [ newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
                 { url = "https://github.com/p-w-rs", label = text "⇱ GitHub" }
-            , link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+            , newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
                 { url = "https://www.linkedin.com/in/joshua-p-76b30b27b/", label = text "⇱ LinkedIn" }
-            , link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+            , newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
                 { url = "https://scholar.google.com/citations?user=O5eVQi0AAAAJ&hl=en", label = text "⇱ Google Scholar" }
             ]
         ]
@@ -325,8 +558,8 @@ profilePic =
 
 about_paragraphs : List (Element Msg)
 about_paragraphs =
-    [ paragraph [] [ text "I am a passionate AI﹠ML professional, currently leading the AI﹠ML group at Space Dynamics Laboratory, where I work on autonomous systems and projects for government contracts. I also provide guidance for other AI and ML projects and occasionaly deploy low-level, performance-critical software in C. Prior to my current role, I was a professor at MSOE, teaching AI and Operating Systems while also engaging in consulting work on data analytics, recommender systems, and AI-guided heart surgery." ]
-    , paragraph [] [ text "My fascination with AI and ML is broad, encompassing deep learning, evolutionary algorithms, reinforcement learning, robotics, and more. I also enjoy exploring unconventional computing methods and applying AI and ML techniques to diverse domains, including biology and physics. I thrive on tackling challenges that require me to learn about new domains or apply novel techniques, and I take pride in my ability to persist in the face of complexity and uncertainty." ]
+    [ paragraph [] [ text "I am a passionate AI﹠ML professional at Space Dynamics Laboratory, where I work on autonomous systems and projects for government contracts. I also provide guidance for other AI and ML projects and occasionaly deploy low-level, performance-critical software in C. Prior to my current role, I was a professor at MSOE, teaching AI and Operating Systems while also engaging in consulting work on data analytics, recommender systems, and AI-guided heart surgery." ]
+    , paragraph [] [ text "My fascination with AI and ML is broad, encompassing deep learning, evolutionary algorithms, reinforcement learning, robotics, and more. I also enjoy exploring unconventional computing methods and applying AI and ML techniques to diverse domains. I thrive on tackling challenges that require me to learn about new domains or apply novel techniques, and I take pride in my ability to persist in the face of complexity and uncertainty." ]
     , paragraph [] [ text "Beyond my work in AI and ML, I am deeply interested in revolutionizing education systems from elementary to university levels. I constantly challenge the status quo and generate ideas for improving various aspects of life. My straightforward and frank approach allows me to effectively communicate my thoughts and ideas." ]
     , paragraph [] [ text "As a dedicated husband and father, and a devout member of The Church of Jesus Christ of Latter-day Saints, my family is the center of my life. I cherish the time we spend together, whether it's exploring the great outdoors, playing sports, or inventing new games to enjoy at home. I take great joy in supporting my children's artistic and academic pursuits and being involved in their sports activities." ]
     ]
@@ -352,12 +585,12 @@ scholarSummary =
             , el [] (text <| "i10-index: " ++ String.fromInt scholarProfile.i10index)
             ]
         , row [ centerX, spacing 20 ]
-            [ link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+            [ newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
                 { url = "https://scholar.google.com/citations?user=O5eVQi0AAAAJ&hl=en", label = text "⇱ Google Scholar" }
-            , link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+            , newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
                 { url = "https://github.com/jpp46", label = text "⇱ PhD Code" }
-            , link [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
-                { url = "https://github.com/p-w-rs", label = text "⇱ GitHub" }
+            , newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
+                { url = "https://github.com/p-w-rs", label = text "⇱ Active GitHub" }
             ]
         , column [ centerX, width fill, spacing 10 ] <| List.map (\cite -> viewCiteYear cite 68) scholarProfile.citations
         ]
@@ -379,7 +612,7 @@ viewExperience experience =
         [ row [ spacing 10, width fill ]
             [ case experience.link of
                 Just url ->
-                    link [ Font.color c_tag, mouseOver [ Font.color c_string ] ] { url = url, label = text "⇱" }
+                    newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ] { url = url, label = text "⇱" }
 
                 Nothing ->
                     none
@@ -428,24 +661,311 @@ about model =
 --------------------------------------------------------------------------------
 
 
-repos model =
-    el [] none
+statusToString : Status -> String
+statusToString status =
+    case status of
+        Done ->
+            "DONE"
+
+        Wip ->
+            "WIP"
+
+        Todo ->
+            "TODO"
 
 
+statusToColor : Status -> Element.Color
+statusToColor status =
+    case status of
+        Done ->
+            c_string
 
---------------------------------------------------------------------------------
+        Wip ->
+            c_func
+
+        Todo ->
+            c_err
 
 
-reviews model =
-    el [] none
+viewStatusDescription : Element msg
+viewStatusDescription =
+    column [ spacing 10, padding 20, Border.width 1, Border.color c_func, Border.rounded 5 ]
+        [ el [ Font.bold ] (text "Status Descriptions:")
+        , textColumn [ spacing 5 ]
+            [ paragraph [] [ el [ Font.color (statusToColor Done) ] (text "DONE"), text " - Project is complete and ready to use" ]
+            , paragraph [] [ el [ Font.color (statusToColor Wip) ] (text "WIP"), text " - Work in progress, may not be fully functional" ]
+            , paragraph [] [ el [ Font.color (statusToColor Todo) ] (text "TODO"), text " - Planned project, not yet started or in early stages" ]
+            ]
+        ]
 
 
+viewTagFilter : Set String -> Set String -> List Repo -> Element Msg
+viewTagFilter allTags selectedTags repos =
+    let
+        getAvailableTags : Set String -> List String
+        getAvailableTags selected =
+            repos
+                |> List.filterMap .meta
+                |> List.filter
+                    (\meta ->
+                        List.all (\tag -> List.member tag meta.tags) (Set.toList selected)
+                    )
+                |> List.concatMap .tags
+                |> Set.fromList
+                |> Set.toList
 
---------------------------------------------------------------------------------
+        availableTags =
+            if Set.isEmpty selectedTags then
+                Set.toList allTags
+
+            else
+                getAvailableTags selectedTags
+    in
+    wrappedRow [ spacing 10, padding 20 ]
+        (List.map
+            (\tag ->
+                let
+                    isSelected =
+                        Set.member tag selectedTags
+
+                    isAvailable =
+                        List.member tag availableTags
+
+                    attributes =
+                        if isSelected then
+                            [ padding 5
+                            , Border.width 1
+                            , Border.rounded 3
+                            , Font.color c_line
+                            , Border.color c_func
+                            , Back.color c_special
+                            , pointer
+                            ]
+
+                        else if isAvailable then
+                            [ padding 5
+                            , Border.width 1
+                            , Border.rounded 3
+                            , Border.color c_func
+                            , Back.color c_bg
+                            , pointer
+                            ]
+
+                        else
+                            [ padding 5
+                            , Border.width 1
+                            , Border.rounded 3
+                            , Border.color c_func
+                            , Back.color c_bg
+                            , Font.color (rgba 1 1 1 0.5)
+                            ]
+                in
+                Input.button attributes
+                    { onPress =
+                        if isSelected || isAvailable then
+                            Just (ToggleTag tag)
+
+                        else
+                            Nothing
+                    , label = text tag
+                    }
+            )
+            (Set.toList allTags)
+        )
 
 
-musings model =
-    el [] none
+viewSortControls : SortBy -> Element Msg
+viewSortControls currentSort =
+    row [ spacing 20, padding 20 ]
+        [ text "Sort by:"
+        , Input.button [ Font.color c_tag ]
+            { onPress = Just (SetSortBy Alphabetical)
+            , label = text "Name"
+            }
+        , Input.button [ Font.color c_tag ]
+            { onPress = Just (SetSortBy (Year True))
+            , label = text "Year (Asc)"
+            }
+        , Input.button [ Font.color c_tag ]
+            { onPress = Just (SetSortBy (Year False))
+            , label = text "Year (Desc)"
+            }
+        ]
+
+
+viewReference : Reference -> Element msg
+viewReference ref =
+    row [ spacing 10 ]
+        [ newTabLink [ Font.color c_tag ]
+            { url = ref.url
+            , label = text ref.title
+            }
+        , case ref.year of
+            Just y ->
+                text ("(" ++ String.fromInt y ++ ")")
+
+            Nothing ->
+                none
+        ]
+
+
+viewRepo : Set String -> Repo -> Element Msg
+viewRepo expandedRepos repo =
+    case repo.meta of
+        Just meta ->
+            let
+                latestYear =
+                    meta.references
+                        |> Maybe.withDefault []
+                        |> List.filterMap .year
+                        |> List.maximum
+            in
+            column [ width fill, spacing 10, padding 20, Border.width 1, Border.color c_func ]
+                [ row [ width fill, spacing 10 ]
+                    [ newTabLink [ Font.color c_tag ]
+                        { url = repo.url
+                        , label = text repo.name
+                        }
+                    , el [ Font.color (statusToColor meta.status) ] (text (statusToString meta.status))
+                    , case latestYear of
+                        Just year ->
+                            el [ alignRight, Font.color c_keyword ] (text (String.fromInt year))
+
+                        Nothing ->
+                            none
+                    ]
+                , paragraph [] [ text meta.description ]
+                , wrappedRow [ spacing 10 ] (List.map (\t -> el [ Font.color c_keyword ] (text ("#" ++ t))) meta.tags)
+                , case meta.references of
+                    Just refs ->
+                        if not (List.isEmpty refs) then
+                            Input.button [ width fill ]
+                                { onPress = Just (ToggleRepoExpand repo.name)
+                                , label =
+                                    if Set.member repo.name expandedRepos then
+                                        column [ spacing 5, width fill ]
+                                            [ text "▼ References"
+                                            , column [ spacing 5 ] (List.map viewReference refs)
+                                            ]
+
+                                    else
+                                        text "▶ References"
+                                }
+
+                        else
+                            none
+
+                    Nothing ->
+                        none
+                ]
+
+        Nothing ->
+            none
+
+
+repositories : Model -> Element Msg
+repositories model =
+    column [ width fill, spacing 20, padding 20 ]
+        [ viewStatusDescription
+        , viewTagFilter model.allTags model.selectedTags model.repos
+        , viewSortControls model.sortBy
+        , if List.isEmpty model.repos then
+            el [ centerX, padding 20 ] (text "Loading repositories...")
+
+          else
+            let
+                filteredRepos =
+                    model.repos
+                        |> List.filter
+                            (\repo ->
+                                case repo.meta of
+                                    Just meta ->
+                                        Set.isEmpty model.selectedTags
+                                            || List.all (\tag -> List.member tag meta.tags) (Set.toList model.selectedTags)
+
+                                    Nothing ->
+                                        False
+                            )
+
+                sortedRepos =
+                    case model.sortBy of
+                        Alphabetical ->
+                            List.sortWith (\a b -> compare a.name b.name) filteredRepos
+
+                        Year asc ->
+                            let
+                                hasDate repo =
+                                    case repo.meta of
+                                        Just meta ->
+                                            meta.references
+                                                |> Maybe.withDefault []
+                                                |> List.filterMap .year
+                                                |> List.isEmpty
+                                                |> not
+
+                                        Nothing ->
+                                            False
+
+                                ( datedRepos, undatedRepos ) =
+                                    List.partition hasDate filteredRepos
+
+                                sortByYear repos =
+                                    List.sortWith
+                                        (\a b ->
+                                            case ( a.meta |> Maybe.andThen .references, b.meta |> Maybe.andThen .references ) of
+                                                ( Just refs1, Just refs2 ) ->
+                                                    let
+                                                        getYear =
+                                                            List.filterMap .year >> List.maximum >> Maybe.withDefault 3000
+
+                                                        comp =
+                                                            if asc then
+                                                                compare
+
+                                                            else
+                                                                \x y -> compare y x
+                                                    in
+                                                    comp (getYear refs1) (getYear refs2)
+
+                                                _ ->
+                                                    compare a.name b.name
+                                        )
+                                        repos
+
+                                sortedDated =
+                                    sortByYear datedRepos
+
+                                sortedUndated =
+                                    List.sortWith (\a b -> compare a.name b.name) undatedRepos
+                            in
+                            if List.isEmpty sortedDated || List.isEmpty sortedUndated then
+                                sortByYear filteredRepos
+
+                            else
+                                sortedDated ++ [ { name = "divider", url = "", meta = Nothing } ] ++ sortedUndated
+            in
+            column [ width fill, spacing 20 ]
+                [ if model.reposLoading then
+                    el [ centerX ] (text "Loading repository metadata...")
+
+                  else
+                    none
+                , column [ width fill, spacing 20 ]
+                    (List.map
+                        (\repo ->
+                            if repo.name == "divider" then
+                                column [ width fill, spacing 10 ]
+                                    [ el [ width fill, Border.width 1, Border.color c_func ] none
+                                    , el [ centerX, Font.color c_keyword ] (text "Projects without dates")
+                                    ]
+
+                            else
+                                viewRepo model.expandedRepos repo
+                        )
+                        sortedRepos
+                    )
+                ]
+        ]
 
 
 
