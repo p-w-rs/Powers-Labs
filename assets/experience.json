@@ -62,7 +62,7 @@
     "endDate": "2023-08-01",
     "description": "Offered data science consulting services to Foley & Lardner.",
     "keyPoints": [
-      "Built a recommender system that helped identify missed cross-selling opportunities, resulting in a 15% increase in cross-selling."
+      "Built a series of recommender systems that helped identify missed cross-selling opportunities."
     ],
     "link": "https://www.foley.com"
   },
