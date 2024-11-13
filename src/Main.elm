@@ -945,26 +945,19 @@ repositories model =
                                 sortedDated ++ [ { name = "divider", url = "", meta = Nothing } ] ++ sortedUndated
             in
             column [ width fill, spacing 20 ]
-                [ if model.reposLoading then
-                    el [ centerX ] (text "Loading repository metadata...")
+                (List.map
+                    (\repo ->
+                        if repo.name == "divider" then
+                            column [ width fill, spacing 10 ]
+                                [ el [ width fill, Border.width 1, Border.color c_func ] none
+                                , el [ centerX, Font.color c_keyword ] (text "Projects without dates")
+                                ]
 
-                  else
-                    none
-                , column [ width fill, spacing 20 ]
-                    (List.map
-                        (\repo ->
-                            if repo.name == "divider" then
-                                column [ width fill, spacing 10 ]
-                                    [ el [ width fill, Border.width 1, Border.color c_func ] none
-                                    , el [ centerX, Font.color c_keyword ] (text "Projects without dates")
-                                    ]
-
-                            else
-                                viewRepo model.expandedRepos repo
-                        )
-                        sortedRepos
+                        else
+                            viewRepo model.expandedRepos repo
                     )
-                ]
+                    sortedRepos
+                )
         ]
 
 
