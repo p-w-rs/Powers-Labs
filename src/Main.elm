@@ -796,9 +796,9 @@ viewSortControls currentSort =
 viewReference : Reference -> Element msg
 viewReference ref =
     row [ spacing 10 ]
-        [ newTabLink [ Font.color c_tag ]
+        [ newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
             { url = ref.url
-            , label = text ref.title
+            , label = text ("⇱ " ++ ref.title)
             }
         , case ref.year of
             Just y ->
@@ -822,9 +822,9 @@ viewRepo expandedRepos repo =
             in
             column [ width fill, spacing 10, padding 20, Border.width 1, Border.color c_func ]
                 [ row [ width fill, spacing 10 ]
-                    [ newTabLink [ Font.color c_tag ]
+                    [ newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
                         { url = repo.url
-                        , label = text repo.name
+                        , label = text ("⇱ " ++ repo.name)
                         }
                     , el [ Font.color (statusToColor meta.status) ] (text (statusToString meta.status))
                     , case latestYear of

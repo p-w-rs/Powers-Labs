@@ -16147,10 +16147,15 @@ var $author$project$Main$viewReference = function (ref) {
 				$mdgriffith$elm_ui$Element$newTabLink,
 				_List_fromArray(
 					[
-						$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$c_tag)
+						$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$c_tag),
+						$mdgriffith$elm_ui$Element$mouseOver(
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$c_string)
+							]))
 					]),
 				{
-					B: $mdgriffith$elm_ui$Element$text(ref.fb),
+					B: $mdgriffith$elm_ui$Element$text('⇱ ' + ref.fb),
 					g: ref.g
 				}),
 				function () {
@@ -16202,10 +16207,15 @@ var $author$project$Main$viewRepo = F2(
 								$mdgriffith$elm_ui$Element$newTabLink,
 								_List_fromArray(
 									[
-										$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$c_tag)
+										$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$c_tag),
+										$mdgriffith$elm_ui$Element$mouseOver(
+										_List_fromArray(
+											[
+												$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$c_string)
+											]))
 									]),
 								{
-									B: $mdgriffith$elm_ui$Element$text(repo.r),
+									B: $mdgriffith$elm_ui$Element$text('⇱ ' + repo.r),
 									g: repo.g
 								}),
 								A2(
