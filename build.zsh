@@ -40,7 +40,7 @@ for name in "${elmlist[@]}"; do
     else
         echo "Error occurred while compiling $name"
     fi
-    
+
     echo "Processing for $name completed."
     echo "------------------"
     echo  "\n\n"

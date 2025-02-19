@@ -57,10 +57,18 @@
   },
   {
     "name": "Research",
-    "level": 4
+    "level": 5
   },
   {
     "name": "Teaching",
     "level": 5
+  },
+  {
+    "name": "Creativity",
+    "level": 5
+  },
+  {
+    "name": "Ternary Computing",
+    "level": 4
   }
 ]

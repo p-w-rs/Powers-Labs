@@ -29,55 +29,6 @@
     "link": "https://www.msoe.edu"
   },
   {
-    "company": "Direct Supply",
-    "position": "Visiting Researcher",
-    "startDate": "2023-05-01",
-    "endDate": "2023-08-01",
-    "description": "Conducted research at Direct Supply as a visiting researcher.",
-    "keyPoints": [
-      "Analyzed transaction data to identify patterns and trends.",
-      "Detected anomalous transactions through data analysis.",
-      "Created a system to unify disparate company names between organizations."
-    ],
-    "link": "https://www.directsupply.com"
-  },
-  {
-    "company": "Family 7 Foundations",
-    "position": "Technology Consultant",
-    "startDate": "2022-09-01",
-    "endDate": null,
-    "description": "Providing technology consulting services to Family 7 Foundations.",
-    "keyPoints": [
-      "Created a front-facing website for marketing purposes.",
-      "Prepared teacher and student manuals for publication.",
-      "Managed email accounts on ProtonMail and custom domains.",
-      "Developed a backend SQLite database for internal tools."
-    ],
-    "link": "https://www.family7foundations.com"
-  },
-  {
-    "company": "Foley & Lardner",
-    "position": "Data Science Consultant",
-    "startDate": "2022-08-01",
-    "endDate": "2023-08-01",
-    "description": "Offered data science consulting services to Foley & Lardner.",
-    "keyPoints": [
-      "Built a series of recommender systems that helped identify missed cross-selling opportunities."
-    ],
-    "link": "https://www.foley.com"
-  },
-  {
-    "company": "CoreMap",
-    "position": "Machine Learning Consultant",
-    "startDate": "2022-05-01",
-    "endDate": "2022-08-01",
-    "description": "Served as a machine learning consultant for CoreMap.",
-    "keyPoints": [
-      "Developed an algorithm to predict the most efficient locations for ablative heart surgery (a minimally invasive procedure) given a specific atrial fibrillation pattern."
-    ],
-    "link": "https://coremapmedical.com"
-  },
-  {
     "company": "Morphology Evolution & Cognition Lab",
     "position": "Research Assistant",
     "startDate": "2017-08-01",

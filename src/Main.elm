@@ -112,6 +112,7 @@ type alias Model =
     , device : Device
     , skills : List Skill
     , experiences : List Experience
+    , consultingExp : List Experience
     , repos : List Repo
     , selectedTags : Set String
     , allTags : Set String
@@ -131,6 +132,8 @@ init flags url key =
         -- skills
         []
         -- experiences
+        []
+        -- consultingExp
         []
         -- repos
         Set.empty
@@ -153,6 +156,10 @@ init flags url key =
         , Http.get
             { url = "assets/experience.json"
             , expect = Http.expectJson GotExperiences (Decode.list experienceDecoder)
+            }
+        , Http.get
+            { url = "assets/consulting.json"
+            , expect = Http.expectJson GotConsultingExperiences (Decode.list experienceDecoder)
             }
         , Http.get
             { url = "https://api.github.com/users/p-w-rs/repos"
@@ -256,7 +263,7 @@ repoMetaDecoder =
         (Decode.field "description" Decode.string)
         (Decode.field "status" statusDecoder)
         (Decode.field "references" (Decode.nullable (Decode.list referenceDecoder)))
-        (Decode.field "tags" (Decode.list Decode.string))
+        (Decode.field "tags" (Decode.list Decode.string) |> Decode.map List.sort)
 
 
 githubRepoDecoder : Decoder { name : String, url : String }
@@ -288,6 +295,7 @@ type Msg
     | DeviceClassified Device
     | GotSkills (Result Http.Error (List Skill))
     | GotExperiences (Result Http.Error (List Experience))
+    | GotConsultingExperiences (Result Http.Error (List Experience))
     | GotRepos (Result Http.Error (List { name : String, url : String }))
     | GotRepoMeta String (Result Http.Error RepoMeta)
     | ToggleTag String
@@ -330,6 +338,16 @@ update msg model =
             case result of
                 Ok experiences ->
                     ( { model | experiences = List.sortBy (\e -> Maybe.withDefault (Date.fromCalendarDate 3000 Time.Jan 1) e.endDate |> Date.toRataDie |> negate) experiences }
+                    , Cmd.none
+                    )
+
+                Err _ ->
+                    ( model, Cmd.none )
+
+        GotConsultingExperiences result ->
+            case result of
+                Ok experiences ->
+                    ( { model | consultingExp = List.sortBy (\e -> Maybe.withDefault (Date.fromCalendarDate 3000 Time.Jan 1) e.endDate |> Date.toRataDie |> negate) experiences }
                     , Cmd.none
                     )
 
@@ -463,6 +481,9 @@ view model =
                 "/about" ->
                     about model
 
+                "/consulting" ->
+                    consulting model
+
                 "/repositories" ->
                     repositories model
 
@@ -480,7 +501,7 @@ view model =
     , body =
         [ layout []
             (column [ height fill, width fill, Font.color c_fg, Back.color c_bg ]
-                [ navbar [ "About", "Repositories" ] path
+                [ navbar [ "About", "Consulting", "Repositories" ] path
                 , page
                 , footer
                 ]
@@ -654,6 +675,26 @@ about model =
             , column [ centerX, width (fill |> minimum 400), spacing 10 ] (List.map viewSkill model.skills)
             ]
         , column [ centerX, width (fill |> maximum 800), spacing 20 ] (List.map viewExperience model.experiences)
+        ]
+
+
+
+--------------------------------------------------------------------------------
+
+
+consult_paragraphs : List (Element Msg)
+consult_paragraphs =
+    [ paragraph [] [ text "I offer consulting services in machine learning and AI, specializing in areas such as deep learning, evolutionary algorithms, reinforcement learning, robotics, and unconventional computing methods. I enjoy applying AI and ML techniques to diverse domains and thrive on challenges that require me to learn about new domains or apply novel techniques." ]
+    , paragraph [] [ text "I take pride in my ability to persist in the face of complexity and uncertainty. If you are interested in working with me, please reach out!" ]
+    ]
+
+
+consulting : Model -> Element Msg
+consulting model =
+    column [ width fill, spacing 50, padding 20 ]
+        [ textColumn [ centerX, width (fill |> maximum 800), spacing 20, Font.justify ] consult_paragraphs
+        , wrappedRow [ width fill, spacing 30, padding 20, Border.width 1, Border.rounded 5, Border.color c_func ]
+            (List.map viewExperience model.consultingExp)
         ]
 
 
