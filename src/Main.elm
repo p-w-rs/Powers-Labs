@@ -185,10 +185,10 @@ type alias GoogleScholarProfile =
 scholarProfile : GoogleScholarProfile
 scholarProfile =
     { npubs = 13
-    , ncitations = 182
+    , ncitations = 244
     , hindex = 3
     , i10index = 2
-    , citations = [ { year = "2019", count = 5 }, { year = "2020", count = 3 }, { year = "2021", count = 24 }, { year = "2022", count = 38 }, { year = "2023", count = 62 }, { year = "2024", count = 50 } ]
+    , citations = [ { year = "2019", count = 5 }, { year = "2020", count = 3 }, { year = "2021", count = 24 }, { year = "2022", count = 37 }, { year = "2023", count = 62 }, { year = "2024", count = 53 }, { year = "2025", count = 60 } ]
     }
 
 
@@ -554,7 +554,7 @@ footer =
             [ el [ Font.bold ] (text "Joshua Powers")
             , el [] (text "AI Research Scientist")
             , link [ mouseOver [ Font.color c_string ] ]
-                { url = "mailto:dev@powerslabs.org", label = text "dev@powerslabs.org" }
+                { url = "mailto:joshua@powerslabs.org", label = text "joshua@powerslabs.org" }
             ]
         , column [ alignRight, spacing 5 ]
             [ newTabLink [ Font.color c_tag, mouseOver [ Font.color c_string ] ]
@@ -579,10 +579,10 @@ profilePic =
 
 about_paragraphs : List (Element Msg)
 about_paragraphs =
-    [ paragraph [] [ text "I am a passionate AI﹠ML professional at Space Dynamics Laboratory, where I work on autonomous systems and projects for government contracts. I also provide guidance for other AI and ML projects and occasionaly deploy low-level, performance-critical software in C. Prior to my current role, I was a professor at MSOE, teaching AI and Operating Systems while also engaging in consulting work on data analytics, recommender systems, and AI-guided heart surgery." ]
-    , paragraph [] [ text "My fascination with AI and ML is broad, encompassing deep learning, evolutionary algorithms, reinforcement learning, robotics, and more. I also enjoy exploring unconventional computing methods and applying AI and ML techniques to diverse domains. I thrive on tackling challenges that require me to learn about new domains or apply novel techniques, and I take pride in my ability to persist in the face of complexity and uncertainty." ]
-    , paragraph [] [ text "Beyond my work in AI and ML, I am deeply interested in revolutionizing education systems from elementary to university levels. I constantly challenge the status quo and generate ideas for improving various aspects of life. My straightforward and frank approach allows me to effectively communicate my thoughts and ideas." ]
-    , paragraph [] [ text "As a dedicated husband and father, and a devout member of The Church of Jesus Christ of Latter-day Saints, my family is the center of my life. I cherish the time we spend together, whether it's exploring the great outdoors, playing sports, or inventing new games to enjoy at home. I take great joy in supporting my children's artistic and academic pursuits and being involved in their sports activities." ]
+    [ paragraph [] [ text "I'm a passionate AI & ML professional at Palladyne AI, where I develop closed-loop autonomy software that gives industrial robots and cobots human-like reasoning capabilities through artificial intelligence and machine learning. Before this, I worked at Space Dynamics Laboratory on autonomous UAVs and munitions for government contracts, provided guidance on AI and ML projects, and deployed performance-critical software in C. I've also taught AI and Operating Systems as a professor at MSOE while consulting on data analytics, recommender systems, and AI-guided heart surgery." ]
+    , paragraph [] [ text "My fascination with AI and ML spans deep learning, evolutionary algorithms, reinforcement learning, robotics, and beyond. I enjoy exploring unconventional computing methods and applying AI and ML techniques to diverse domains. I thrive on challenges that push me to learn new domains or apply novel techniques, and I take pride in persisting through complexity and uncertainty." ]
+    , paragraph [] [ text "Beyond AI and ML, I'm deeply interested in revolutionizing education from elementary through university levels. I constantly challenge the status quo and generate ideas for improving various aspects of life. My straightforward, frank approach helps me communicate my thoughts and ideas effectively." ]
+    , paragraph [] [ text "As a dedicated husband and father and a devout member of The Church of Jesus Christ of Latter-day Saints, my family is the center of my life. I cherish our time together—whether we're exploring the outdoors, playing sports, or inventing new games at home. I take great joy in supporting my children's artistic and academic pursuits and being involved in their sports activities." ]
     ]
 
 
