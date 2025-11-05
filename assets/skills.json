@@ -29,6 +29,10 @@
   },
   {
     "name": "Computer Vision",
+    "level": 4
+  },
+  {
+    "name": "Natural Language Processing",
     "level": 3
   },
   {

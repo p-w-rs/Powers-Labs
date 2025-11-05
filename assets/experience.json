@@ -1,14 +1,26 @@
 [
   {
-    "company": "Space Dynamics Laboratory",
-    "position": "AI Scientist",
-    "startDate": "2023-09-01",
+    "company": "Palladyne AI",
+    "position": "AI Research Engineer",
+    "startDate": "2025-06-01",
     "endDate": null,
+    "description": "Working on AI and robotics systems for autonomous manipulation and grasping applications.",
+    "keyPoints": [
+      "Developed 6-DoF (Six Degrees of Freedom) pose estimation framework for robotic grasping applications.",
+      "Optimized deep learning models and implementation code for use with TensorRT acceleration for real-time inference."
+    ],
+    "link": "https://www.palladyneai.com"
+  },
+  {
+    "company": "Space Dynamics Laboratory",
+    "position": "Machine Learning Engineer",
+    "startDate": "2023-09-01",
+    "endDate": "2025-06-01",
     "description": "Working on autonomous systems and projects for government contracts.",
     "keyPoints": [
-      "Developed an imprinting library for on-the-fly labeling in military surveillance drones.",
-      "Developed the Networked Collaborative Autonomous (NCA) add-on to the Weapon Open Systems Architecture (WOSA) for the next generation of modular munitions.",
-      "Developed a high-performance, low-level, reference router for the Weapon Open Systems Architecture (WOSA)."
+      "Implemented military drone ATR (Automatic Target Recognition) system with real-time training updates using an imprinting library for on-the-fly labeling.",
+      "Developed the Networked Collaborative Autonomous (NCA) specification for the Weapon Open Systems Architecture (WOSA) for the next generation of modular munitions.",
+      "Engineered high-performance router software in C for WOSA enabled munitions, creating a low-level reference implementation."
     ],
     "link": "https://www.sdl.usu.edu"
   },
@@ -21,10 +33,10 @@
     "keyPoints": [
       "Created a new curriculum for hands-on OS development.",
       "Created and modified multiple projects for Network Protocols curriculum.",
-      "Mentored multiple independent studies courses for deep reinforcement learning, ML weather prediction, and algorithmic trading.",
-      "Mentored a capstone research project for deep learning based warehouse monitoring and automation.",
+      "Led and mentored multiple independent studies courses for deep reinforcement learning, ML weather prediction, and algorithmic trading.",
+      "Mentored a capstone research project for deep learning based warehouse automation and monitoring.",
       "Mentored a research project into non-Turing based computational models.",
-      "Performed community outreach via multiple consulting projects; mentored a team of students in consulting work."
+      "Spearheaded industry consulting projects in AI and performed community outreach via multiple consulting engagements; mentored a team of students in consulting work."
     ],
     "link": "https://www.msoe.edu"
   },
@@ -35,11 +47,10 @@
     "endDate": "2021-08-01",
     "description": "Conducted research at the Morphology Evolution & Cognition Lab.",
     "keyPoints": [
-      "Published multiple papers on embodied cognition applied to catastrophic forgetting.",
-      "Presented papers and research at multiple conferences and seminars.",
-      "Reviewed papers for multiple high-tier journals and conferences in robotics and machine learning.",
-      "Mentored Master's students in their thesis and projects.",
-      "Mentored undergraduate lab members."
+      "Published multiple peer-reviewed papers on embodied cognition applied to catastrophic forgetting in neural networks.",
+      "Presented papers and research at multiple conferences and seminars including the Artificial Life Conference.",
+      "Reviewed papers for multiple high-tier journals and conferences in robotics and machine learning (IEEE Robosoft, IROS, RSS, and others).",
+      "Mentored graduate and undergraduate researchers in ML and robotics projects, including Master's students in their thesis work."
     ],
     "link": "https://www.meclab.org"
   },
@@ -50,16 +61,16 @@
     "endDate": "2017-08-01",
     "description": "Interned at the Air Force Research Lab.",
     "keyPoints": [
-      "Researched methods for applying deep reinforcement learning in collaborative/swarm environments."
+      "Applied deep reinforcement learning to drone collaborative/swarm environments."
     ],
     "link": "https://www.afrl.af.mil"
   },
   {
-    "company": "Perception, Control, & Cognition Lab",
+    "company": "Perception Control & Cognition Lab",
     "position": "Research Assistant",
     "startDate": "2016-05-01",
     "endDate": "2017-05-01",
-    "description": "Worked as a research assistant at the Perception, Control, & Cognition Lab.",
+    "description": "Worked as a research assistant at the Perception Control & Cognition Lab.",
     "keyPoints": [
       "Developed a novel method for gradient-based adaptive exploration in deep reinforcement learning."
     ],
