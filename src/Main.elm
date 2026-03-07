@@ -185,10 +185,10 @@ type alias GoogleScholarProfile =
 scholarProfile : GoogleScholarProfile
 scholarProfile =
     { npubs = 13
-    , ncitations = 244
-    , hindex = 3
+    , ncitations = 268
+    , hindex = 4
     , i10index = 2
-    , citations = [ { year = "2019", count = 5 }, { year = "2020", count = 3 }, { year = "2021", count = 24 }, { year = "2022", count = 37 }, { year = "2023", count = 62 }, { year = "2024", count = 53 }, { year = "2025", count = 60 } ]
+    , citations = [ { year = "2019", count = 5 }, { year = "2020", count = 4 }, { year = "2021", count = 24 }, { year = "2022", count = 37 }, { year = "2023", count = 62 }, { year = "2024", count = 50 }, { year = "2025", count = 79 }, { year = "2026", count = 7 } ]
     }
 
 

@@ -7648,7 +7648,7 @@ var $author$project$Main$RepoMeta = F4(
 var $elm$json$Json$Decode$map4 = _Json_map4;
 var $author$project$Main$Reference = F3(
 	function (title, url, year) {
-		return {fc: title, f: url, Z: year};
+		return {fc: title, f: url, S: year};
 	});
 var $elm$json$Json$Decode$map3 = _Json_map3;
 var $author$project$Main$referenceDecoder = A4(
@@ -7916,7 +7916,7 @@ var $author$project$Main$update = F2(
 					var repos = A2(
 						$elm$core$List$map,
 						function (r) {
-							return {V: $elm$core$Maybe$Nothing, r: r.r, f: r.f};
+							return {W: $elm$core$Maybe$Nothing, r: r.r, f: r.f};
 						},
 						githubRepos);
 					return _Utils_Tuple2(
@@ -7950,7 +7950,7 @@ var $author$project$Main$update = F2(
 						return _Utils_eq(repo.r, repoName) ? _Utils_update(
 							repo,
 							{
-								V: $elm$core$Maybe$Just(meta)
+								W: $elm$core$Maybe$Just(meta)
 							}) : repo;
 					};
 					var newRepos = A2($elm$core$List$map, updateRepo, model.ba);
@@ -7960,7 +7960,7 @@ var $author$project$Main$update = F2(
 							A2(
 								$elm$core$Basics$composeR,
 								function ($) {
-									return $.V;
+									return $.W;
 								},
 								$elm$core$Basics$neq($elm$core$Maybe$Nothing)),
 							newRepos));
@@ -7974,7 +7974,7 @@ var $author$project$Main$update = F2(
 							A2(
 								$elm$core$List$filterMap,
 								function ($) {
-									return $.V;
+									return $.W;
 								},
 								newRepos)));
 					return _Utils_Tuple2(
@@ -7989,7 +7989,7 @@ var $author$project$Main$update = F2(
 							A2(
 								$elm$core$Basics$composeR,
 								function ($) {
-									return $.V;
+									return $.W;
 								},
 								$elm$core$Basics$neq($elm$core$Maybe$Nothing)),
 							model.ba));
@@ -8037,7 +8037,7 @@ var $mdgriffith$elm_ui$Internal$Model$asParagraph = 4;
 var $mdgriffith$elm_ui$Internal$Model$Generic = {$: 0};
 var $mdgriffith$elm_ui$Internal$Model$div = $mdgriffith$elm_ui$Internal$Model$Generic;
 var $mdgriffith$elm_ui$Internal$Model$NoNearbyChildren = {$: 0};
-var $mdgriffith$elm_ui$Internal$Style$classes = {hn: 'a', dw: 'atv', hq: 'ab', hr: 'cx', hs: 'cy', ht: 'acb', hu: 'accx', hv: 'accy', hw: 'acr', fx: 'al', fy: 'ar', hx: 'at', dx: 'ah', dy: 'av', hA: 's', hF: 'bh', hG: 'b', hI: 'w7', hK: 'bd', hL: 'bdt', cS: 'bn', hM: 'bs', cT: 'cpe', hW: 'cp', hX: 'cpx', hY: 'cpy', aZ: 'c', cW: 'ctr', cX: 'cb', cY: 'ccx', a_: 'ccy', ce: 'cl', cZ: 'cr', h0: 'ct', h3: 'cptr', h4: 'ctxt', o: 'fcs', fT: 'focus-within', ih: 'fs', ii: 'g', dX: 'hbh', dZ: 'hc', fY: 'he', d_: 'hf', fZ: 'hfp', il: 'hv', $9: 'ic', ip: 'fr', c6: 'lbl', is: 'iml', it: 'imlf', iu: 'imlp', iv: 'implw', iw: 'it', iz: 'i', gg: 'lnk', bT: 'nb', gq: 'notxt', iO: 'ol', iP: 'or', bt: 'oq', iV: 'oh', gx: 'pg', gy: 'p', iW: 'ppe', i$: 'ui', gS: 'r', i3: 'sb', i4: 'sbx', i5: 'sby', i7: 'sbt', jb: 'e', jc: 'cap', jd: 'sev', jl: 'sk', ai: 't', js: 'tc', jt: 'w8', ju: 'w2', jv: 'w9', jw: 'tj', dq: 'tja', jx: 'tl', jy: 'w3', jz: 'w5', jA: 'w4', jB: 'tr', jC: 'w6', jD: 'w1', jE: 'tun', Y: 'ts', bz: 'clr', jP: 'u', fm: 'wc', hh: 'we', fn: 'wf', hi: 'wfp', fp: 'wrp'};
+var $mdgriffith$elm_ui$Internal$Style$classes = {hn: 'a', dw: 'atv', hq: 'ab', hr: 'cx', hs: 'cy', ht: 'acb', hu: 'accx', hv: 'accy', hw: 'acr', fx: 'al', fy: 'ar', hx: 'at', dx: 'ah', dy: 'av', hA: 's', hF: 'bh', hG: 'b', hI: 'w7', hK: 'bd', hL: 'bdt', cS: 'bn', hM: 'bs', cT: 'cpe', hW: 'cp', hX: 'cpx', hY: 'cpy', aZ: 'c', cW: 'ctr', cX: 'cb', cY: 'ccx', a_: 'ccy', ce: 'cl', cZ: 'cr', h0: 'ct', h3: 'cptr', h4: 'ctxt', o: 'fcs', fT: 'focus-within', ih: 'fs', ii: 'g', dX: 'hbh', dZ: 'hc', fY: 'he', d_: 'hf', fZ: 'hfp', il: 'hv', $9: 'ic', ip: 'fr', c6: 'lbl', is: 'iml', it: 'imlf', iu: 'imlp', iv: 'implw', iw: 'it', iz: 'i', gg: 'lnk', bT: 'nb', gq: 'notxt', iO: 'ol', iP: 'or', bt: 'oq', iV: 'oh', gx: 'pg', gy: 'p', iW: 'ppe', i$: 'ui', gS: 'r', i3: 'sb', i4: 'sbx', i5: 'sby', i7: 'sbt', jb: 'e', jc: 'cap', jd: 'sev', jl: 'sk', ai: 't', js: 'tc', jt: 'w8', ju: 'w2', jv: 'w9', jw: 'tj', dq: 'tja', jx: 'tl', jy: 'w3', jz: 'w5', jA: 'w4', jB: 'tr', jC: 'w6', jD: 'w1', jE: 'tun', Z: 'ts', bz: 'clr', jP: 'u', fm: 'wc', hh: 'we', fn: 'wf', hi: 'wfp', fp: 'wrp'};
 var $mdgriffith$elm_ui$Internal$Model$columnClass = $mdgriffith$elm_ui$Internal$Style$classes.hA + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.aZ);
 var $mdgriffith$elm_ui$Internal$Model$gridClass = $mdgriffith$elm_ui$Internal$Style$classes.hA + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.ii);
 var $mdgriffith$elm_ui$Internal$Model$pageClass = $mdgriffith$elm_ui$Internal$Style$classes.hA + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.gx);
@@ -9202,7 +9202,7 @@ var $mdgriffith$elm_ui$Internal$Style$baseSheet = _List_fromArray(
 					])),
 				A2(
 				$mdgriffith$elm_ui$Internal$Style$Descriptor,
-				$mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.Y),
+				$mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.Z),
 				_List_fromArray(
 					[
 						A2(
@@ -13981,17 +13981,18 @@ var $mdgriffith$elm_ui$Element$row = F2(
 var $author$project$Main$scholarProfile = {
 	dL: _List_fromArray(
 		[
-			{as: 5, Z: '2019'},
-			{as: 3, Z: '2020'},
-			{as: 24, Z: '2021'},
-			{as: 37, Z: '2022'},
-			{as: 62, Z: '2023'},
-			{as: 53, Z: '2024'},
-			{as: 60, Z: '2025'}
+			{ak: 5, S: '2019'},
+			{ak: 4, S: '2020'},
+			{ak: 24, S: '2021'},
+			{ak: 37, S: '2022'},
+			{ak: 62, S: '2023'},
+			{ak: 50, S: '2024'},
+			{ak: 79, S: '2025'},
+			{ak: 7, S: '2026'}
 		]),
-	d$: 3,
+	d$: 4,
 	d2: 2,
-	es: 244,
+	es: 268,
 	ev: 13
 };
 var $mdgriffith$elm_ui$Internal$Model$FontSize = function (a) {
@@ -14095,14 +14096,14 @@ var $author$project$Main$viewCiteYear = F2(
 							$mdgriffith$elm_ui$Element$width(
 							$mdgriffith$elm_ui$Element$px(50))
 						]),
-					$mdgriffith$elm_ui$Element$text(citation.Z)),
+					$mdgriffith$elm_ui$Element$text(citation.S)),
 					A2(
 					$mdgriffith$elm_ui$Element$el,
 					_List_fromArray(
 						[
 							$mdgriffith$elm_ui$Element$alignLeft,
 							$mdgriffith$elm_ui$Element$width(
-							$mdgriffith$elm_ui$Element$fillPortion(citation.as)),
+							$mdgriffith$elm_ui$Element$fillPortion(citation.ak)),
 							$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
 							$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$c_string)
 						]),
@@ -14112,7 +14113,7 @@ var $author$project$Main$viewCiteYear = F2(
 					_List_fromArray(
 						[
 							$mdgriffith$elm_ui$Element$width(
-							$mdgriffith$elm_ui$Element$fillPortion(max - citation.as))
+							$mdgriffith$elm_ui$Element$fillPortion(max - citation.ak))
 						]),
 					$mdgriffith$elm_ui$Element$none),
 					A2(
@@ -14127,7 +14128,7 @@ var $author$project$Main$viewCiteYear = F2(
 							$mdgriffith$elm_ui$Element$Font$size(14)
 						]),
 					$mdgriffith$elm_ui$Element$text(
-						$elm$core$String$fromInt(citation.as)))
+						$elm$core$String$fromInt(citation.ak)))
 				]));
 	});
 var $author$project$Main$scholarSummary = A2(
@@ -14310,7 +14311,7 @@ var $justinmimbs$date$Date$toCalendarDateHelp = F3(
 				d = $temp$d;
 				continue toCalendarDateHelp;
 			} else {
-				return {fI: d, gm: m, Z: y};
+				return {fI: d, gm: m, S: y};
 			}
 		}
 	});
@@ -14342,13 +14343,13 @@ var $justinmimbs$date$Date$toOrdinalDate = function (_v0) {
 	var y = $justinmimbs$date$Date$year(rd);
 	return {
 		ex: rd - $justinmimbs$date$Date$daysBeforeYear(y),
-		Z: y
+		S: y
 	};
 };
 var $justinmimbs$date$Date$toCalendarDate = function (_v0) {
 	var rd = _v0;
 	var date = $justinmimbs$date$Date$toOrdinalDate(rd);
-	return A3($justinmimbs$date$Date$toCalendarDateHelp, date.Z, 0, date.ex);
+	return A3($justinmimbs$date$Date$toCalendarDateHelp, date.S, 0, date.ex);
 };
 var $justinmimbs$date$Date$day = A2(
 	$elm$core$Basics$composeR,
@@ -16248,7 +16249,7 @@ var $author$project$Main$viewReference = function (ref) {
 					f: ref.f
 				}),
 				function () {
-				var _v0 = ref.Z;
+				var _v0 = ref.S;
 				if (!_v0.$) {
 					var y = _v0.a;
 					return $mdgriffith$elm_ui$Element$text(
@@ -16261,14 +16262,14 @@ var $author$project$Main$viewReference = function (ref) {
 };
 var $author$project$Main$viewRepo = F2(
 	function (expandedRepos, repo) {
-		var _v0 = repo.V;
+		var _v0 = repo.W;
 		if (!_v0.$) {
 			var meta = _v0.a;
 			var latestYear = $elm$core$List$maximum(
 				A2(
 					$elm$core$List$filterMap,
 					function ($) {
-						return $.Z;
+						return $.S;
 					},
 					A2($elm$core$Maybe$withDefault, _List_Nil, meta.bX)));
 			return A2(
@@ -16553,7 +16554,7 @@ var $author$project$Main$viewTagFilter = F3(
 							A2(
 								$elm$core$List$filterMap,
 								function ($) {
-									return $.V;
+									return $.W;
 								},
 								repos)))));
 		};
@@ -16636,7 +16637,7 @@ var $author$project$Main$repositories = function (model) {
 					var filteredRepos = A2(
 						$elm$core$List$filter,
 						function (repo) {
-							var _v4 = repo.V;
+							var _v4 = repo.W;
 							if (!_v4.$) {
 								var meta = _v4.a;
 								return $elm$core$Set$isEmpty(model.bb) || A2(
@@ -16673,13 +16674,13 @@ var $author$project$Main$repositories = function (model) {
 													function ($) {
 														return $.bX;
 													},
-													a.V),
+													a.W),
 												A2(
 													$elm$core$Maybe$andThen,
 													function ($) {
 														return $.bX;
 													},
-													b.V));
+													b.W));
 											if ((!_v3.a.$) && (!_v3.b.$)) {
 												var refs1 = _v3.a.a;
 												var refs2 = _v3.b.a;
@@ -16687,7 +16688,7 @@ var $author$project$Main$repositories = function (model) {
 													$elm$core$Basics$composeR,
 													$elm$core$List$filterMap(
 														function ($) {
-															return $.Z;
+															return $.S;
 														}),
 													A2(
 														$elm$core$Basics$composeR,
@@ -16708,14 +16709,14 @@ var $author$project$Main$repositories = function (model) {
 									repos);
 							};
 							var hasDate = function (repo) {
-								var _v2 = repo.V;
+								var _v2 = repo.W;
 								if (!_v2.$) {
 									var meta = _v2.a;
 									return !$elm$core$List$isEmpty(
 										A2(
 											$elm$core$List$filterMap,
 											function ($) {
-												return $.Z;
+												return $.S;
 											},
 											A2($elm$core$Maybe$withDefault, _List_Nil, meta.bX)));
 								} else {
@@ -16738,7 +16739,7 @@ var $author$project$Main$repositories = function (model) {
 								_Utils_ap(
 									_List_fromArray(
 										[
-											{V: $elm$core$Maybe$Nothing, r: 'divider', f: ''}
+											{W: $elm$core$Maybe$Nothing, r: 'divider', f: ''}
 										]),
 									sortedUndated));
 						}
