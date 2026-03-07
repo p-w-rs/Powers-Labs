@@ -18,7 +18,7 @@
     "endDate": "2025-06-01",
     "description": "Working on autonomous systems and projects for government contracts.",
     "keyPoints": [
-      "Implemented military drone ATR (Automatic Target Recognition) system with real-time training updates using an imprinting library for on-the-fly labeling.",
+      "Implemented military drone ATR (Automatic Target Recognition) system with real-time training updates for on-the-fly labeling.",
       "Developed the Networked Collaborative Autonomous (NCA) specification for the Weapon Open Systems Architecture (WOSA) for the next generation of modular munitions.",
       "Engineered high-performance router software in C for WOSA enabled munitions, creating a low-level reference implementation."
     ],
@@ -60,9 +60,7 @@
     "startDate": "2017-05-01",
     "endDate": "2017-08-01",
     "description": "Interned at the Air Force Research Lab.",
-    "keyPoints": [
-      "Applied deep reinforcement learning to drone collaborative/swarm environments."
-    ],
+    "keyPoints": ["Applied deep reinforcement learning to drone collaborative/swarm environments."],
     "link": "https://www.afrl.af.mil"
   },
   {
@@ -71,9 +69,7 @@
     "startDate": "2016-05-01",
     "endDate": "2017-05-01",
     "description": "Worked as a research assistant at the Perception Control & Cognition Lab.",
-    "keyPoints": [
-      "Developed a novel method for gradient-based adaptive exploration in deep reinforcement learning."
-    ],
+    "keyPoints": ["Developed a novel method for gradient-based adaptive exploration in deep reinforcement learning."],
     "link": "https://github.com/BYU-PCCL"
   },
   {
