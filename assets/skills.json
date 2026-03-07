@@ -5,7 +5,7 @@
   },
   {
     "name": "Python",
-    "level": 3
+    "level": 5
   },
   {
     "name": "C",
@@ -17,7 +17,7 @@
   },
   {
     "name": "Elm",
-    "level": 4
+    "level": 3
   },
   {
     "name": "Machine Learning",
@@ -29,11 +29,11 @@
   },
   {
     "name": "Computer Vision",
-    "level": 4
+    "level": 5
   },
   {
     "name": "Natural Language Processing",
-    "level": 3
+    "level": 4
   },
   {
     "name": "Web Development",
@@ -50,10 +50,6 @@
   {
     "name": "Reinforcment Learning",
     "level": 5
-  },
-  {
-    "name": "Natural Language Processing",
-    "level": 3
   },
   {
     "name": "Embodied Congition",
@@ -74,5 +70,29 @@
   {
     "name": "Ternary Computing",
     "level": 4
+  },
+  {
+    "name": "TensorRT",
+    "level": 5
+  },
+  {
+    "name": "JAX",
+    "level": 5
+  },
+  {
+    "name": "PyTorch",
+    "level": 4
+  },
+  {
+    "name": "Tensorflow",
+    "level": 3
+  },
+  {
+    "name": "Polars",
+    "level": 3
+  },
+  {
+    "name": "Linux",
+    "level": 5
   }
 ]
