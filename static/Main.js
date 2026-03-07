@@ -13462,13 +13462,6 @@ var $author$project$Main$about_paragraphs = _List_fromArray(
 		_List_Nil,
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$text('Beyond AI and ML, I\'m deeply interested in revolutionizing education from elementary through university levels. I constantly challenge the status quo and generate ideas for improving various aspects of life. My straightforward, frank approach helps me communicate my thoughts and ideas effectively.')
-			])),
-		A2(
-		$mdgriffith$elm_ui$Element$paragraph,
-		_List_Nil,
-		_List_fromArray(
-			[
 				$mdgriffith$elm_ui$Element$text('As a dedicated husband and father and a devout member of The Church of Jesus Christ of Latter-day Saints, my family is the center of my life. I cherish our time together—whether we\'re exploring the outdoors, playing sports, or inventing new games at home. I take great joy in supporting my children\'s artistic and academic pursuits and being involved in their sports activities.')
 			]))
 	]);
